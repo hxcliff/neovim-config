@@ -48,9 +48,7 @@ local config = {
     lualine_z = {},
     lualine_c = {},
     lualine_x = {}
-  },
-
-  extensions = {'nvim-tree'}
+  }
 }
 
 local function ins_left(component) table.insert(config.sections.lualine_c, component) end
@@ -99,8 +97,6 @@ ins_left {
 
 ins_left {'location'}
 
-ins_left {'progress', color = {fg = colors.fg, gui = 'bold'}}
-
 ins_left {
   'diagnostics',
   sources = {'nvim_diagnostic'},
@@ -112,22 +108,30 @@ ins_left {
   }
 }
 
-ins_left {function() return '%=' end}
-
 ins_left {
-  function()
-    local msg = 'No Active Lsp'
-    local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
-    local clients = vim.lsp.get_active_clients()
-    if next(clients) == nil then return msg end
-    for _, client in ipairs(clients) do
-      local filetypes = client.config.filetypes
-      if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then return client.name end
-    end
-    return msg
-  end,
-  icon = ' LSP:',
-  color = {fg = '#ffffff', gui = 'bold'}
+  'lsp_progress',
+  display_components = { 'lsp_client_name', { 'title', 'percentage', 'message' }},
+  colors = {
+    percentage = colors.cyan,
+    title = colors.cyan,
+    message = colors.cyan,
+    spinner = colors.cyan,
+    lsp_client_name = colors.magenta,
+    use = true,
+  },
+  separators = {
+    component = ' ',
+    progress = ' | ',
+    message = { pre = '(', post = ')'},
+    percentage = { pre = '', post = '%% ' },
+    title = { pre = '', post = ': ' },
+    lsp_client_name = { pre = '[', post = ']' },
+    spinner = { pre = '', post = '' },
+    message = { commenced = 'In Progress', completed = 'Completed' },
+  },
+  display_components = { 'lsp_client_name', 'spinner', { 'title', 'percentage', 'message' } },
+  timer = { progress_enddelay = 500, spinner = 1000, lsp_client_name_enddelay = 1000 },
+  spinner_symbols = { '🌑 ', '🌒 ', '🌓 ', '🌔 ', '🌕 ', '🌖 ', '🌗 ', '🌘 ' }
 }
 
 ins_right {

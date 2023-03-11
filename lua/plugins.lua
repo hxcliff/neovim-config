@@ -6,6 +6,7 @@ return require('packer').startup(function(use)
     config = function() vim.cmd [[colorscheme dracula]] end
   }
   use {'nvim-lualine/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true}}
+  use 'arkav/lualine-lsp-progress'
   use {
     'nvim-treesitter/nvim-treesitter',
     run = function() require('nvim-treesitter.install').update {with_sync = true} end
@@ -23,7 +24,6 @@ return require('packer').startup(function(use)
       vim.api.nvim_set_keymap('n', 'k', '<Plug>(faster_move_k)', {noremap = false, silent = true})
     end
   }
-  use 'simnalamburt/vim-mundo'
   use {
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
@@ -38,7 +38,4 @@ return require('packer').startup(function(use)
   use 'hrsh7th/nvim-cmp'
   use {'SirVer/ultisnips', requires = {{'honza/vim-snippets', rtp = '.'}}}
   use 'onsails/lspkind-nvim'
-  -- use 'liuchengxu/vista.vim'
-  use {'nvim-tree/nvim-tree.lua', requires = {'nvim-tree/nvim-web-devicons'}, tag = 'nightly'}
-  use 'rcarriga/nvim-notify'
 end)

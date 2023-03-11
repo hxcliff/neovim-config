@@ -26,14 +26,13 @@ map('n', '<leader>w', ':HopWord<CR>', opt)
 map('n', '<leader>l', ':HopLine<CR>', opt)
 
 -- map('n', '<leader>\\', ':Vista!!<CR>', {noremap = true})
-
-map('n', '<leader>u', ':MundoToggle<CR>', opt)
+-- map('n', '<leader>u', ':MundoToggle<CR>', opt)
+-- map('n', '<leader>e', ':NvimTreeToggle<CR>', opt)
 
 map('n', ',f', ':Telescope find_files theme=dropdown<CR>', opt)
 map('n', ',w', ':Telescope live_grep theme=dropdown<CR>', opt)
 map('n', ',b', ':Telescope buffers theme=dropdown<CR>', opt)
 
-map('n', '<leader>e', ':NvimTreeToggle<CR>', opt)
 
 local pluginKeys = {}
 
