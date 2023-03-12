@@ -29,6 +29,10 @@ return require('packer').startup(function(use)
     branch = '0.1.x',
     requires = {'nvim-lua/plenary.nvim'}
   }
+  use {
+    'windwp/nvim-autopairs',
+    config = function() require('nvim-autopairs').setup {} end
+  }
   use 'neovim/nvim-lspconfig'
   use 'simrat39/rust-tools.nvim'
   use 'hrsh7th/cmp-nvim-lsp'
@@ -36,6 +40,8 @@ return require('packer').startup(function(use)
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-cmdline'
   use 'hrsh7th/nvim-cmp'
-  use {'SirVer/ultisnips', requires = {{'honza/vim-snippets', rtp = '.'}}}
+  use 'saadparwaiz1/cmp_luasnip'
+  use 'L3MON4D3/LuaSnip'
+  use 'rafamadriz/friendly-snippets'
   use 'onsails/lspkind-nvim'
 end)

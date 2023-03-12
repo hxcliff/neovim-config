@@ -1,12 +1,14 @@
 local lspkind = require('lspkind')
+local luasnip = require("luasnip")
 local cmp = require('cmp')
 
-local ultisnips = require('plugin_config/ultisnips')
-ultisnips.setup()
+require('luasnip.loaders.from_vscode').lazy_load()
 
 cmp.setup {
-  snippet = {expand = function(args) vim.fn['UltiSnips#Anon'](args.body) end},
-  sources = cmp.config.sources({{name = 'nvim_lsp'}, {name = 'ultisnips'}},
+  snippet = {
+    expand = function(args) luasnip.lsp_expand(args.body) end
+  },
+  sources = cmp.config.sources({{name = 'nvim_lsp'}, {name = 'luasnip'}},
                                {{name = 'buffer'}, {name = 'path'}}),
   mapping = require'keybindings'.cmp(cmp),
   formatting = {
