@@ -50,8 +50,8 @@ pluginKeys.mapLSP = function(mapbuf)
   mapbuf('n', '<leader>f', '<cmd>lua vim.lsp.buf.format()<CR>', {noremap = true})
 end
 
-local luasnip = require('luasnip')
 pluginKeys.cmp = function(cmp)
+  local luasnip = require('luasnip')
   local t = function(str) return vim.api.nvim_replace_termcodes(str, true, true, true) end
   return {
     ['<Tab>'] = cmp.mapping({
