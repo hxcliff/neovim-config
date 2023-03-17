@@ -35,6 +35,7 @@ return require('packer').startup(function(use)
   }
   use 'neovim/nvim-lspconfig'
   use 'simrat39/rust-tools.nvim'
+  use 'akinsho/flutter-tools.nvim'
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path'
