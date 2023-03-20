@@ -83,3 +83,14 @@ vim.o.pumheight = 10
 vim.g.mouse = 'a'
 vim.g.undofile = true
 
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'dart',
+  callback = function ()
+    vim.o.tabstop = 2
+    vim.bo.tabstop = 2
+    vim.o.softtabstop = 2
+    vim.o.shiftround = true
+    vim.o.shiftwidth = 2
+    vim.bo.shiftwidth = 2
+  end,
+})
