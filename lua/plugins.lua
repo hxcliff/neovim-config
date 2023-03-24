@@ -45,4 +45,18 @@ return require('packer').startup(function(use)
   use 'L3MON4D3/LuaSnip'
   use 'rafamadriz/friendly-snippets'
   use 'onsails/lspkind-nvim'
+  use {
+    "zbirenbaum/neodim",
+    event = "LspAttach",
+    config = function ()
+      require("neodim").setup({
+        alpha = 0.5,
+        hide = {
+          virtual_text = true,
+          signs = false,
+          underline = false,
+        }
+      })
+    end
+  }
 end)

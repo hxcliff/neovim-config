@@ -82,6 +82,7 @@ vim.o.pumheight = 10
 -- vim.g.python3_host_prog = "~/.config/nvim/nvim-python/bin/python3"
 vim.g.mouse = 'a'
 vim.g.undofile = true
+vim.o.cursorcolumn = true
 
 vim.api.nvim_create_autocmd('FileType', {
   pattern = '*',
