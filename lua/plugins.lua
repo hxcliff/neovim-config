@@ -2,8 +2,11 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
   use {
     'dracula/vim',
-    as = 'dracula',
-    config = function() vim.cmd [[colorscheme dracula]] end
+    as = 'dracula'
+  }
+  use {
+    'shaunsingh/nord.nvim',
+    as = 'nord'
   }
   use {'nvim-lualine/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true}}
   use 'arkav/lualine-lsp-progress'

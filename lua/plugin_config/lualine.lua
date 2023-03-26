@@ -28,10 +28,11 @@ local config = {
   options = {
     component_separators = '',
     section_separators = '',
-    theme = {
-      normal = {c = {fg = colors.fg, bg = colors.bg}},
-      inactive = {c = {fg = colors.fg, bg = colors.bg}}
-    }
+    theme = 'nord'
+    --theme = {
+      --normal = {c = {fg = colors.fg, bg = colors.bg}},
+      --inactive = {c = {fg = colors.fg, bg = colors.bg}}
+    --}
   },
   sections = {
     lualine_a = {},

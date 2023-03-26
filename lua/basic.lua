@@ -1,3 +1,6 @@
+-- vim.cmd [[colorscheme dracula]]
+vim.cmd [[colorscheme nord]]
+
 vim.o.termguicolors = true
 -- utf8
 vim.g.encoding = 'UTF-8'
