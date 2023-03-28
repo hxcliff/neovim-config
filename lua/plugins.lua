@@ -8,6 +8,9 @@ return require('packer').startup(function(use)
     'shaunsingh/nord.nvim',
     as = 'nord'
   }
+  use 'folke/tokyonight.nvim'
+  use 'olimorris/onedarkpro.nvim'
+  use { 'catppuccin/nvim', as = 'catppuccin' }
   use {'nvim-lualine/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true}}
   use 'arkav/lualine-lsp-progress'
   use {

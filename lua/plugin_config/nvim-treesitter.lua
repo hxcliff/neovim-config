@@ -1,6 +1,6 @@
 require('nvim-treesitter.configs').setup {
   ensure_installed = {
-    'python', 'lua', 'java', 'rust', 'json', 'html', 'css', 'javascript', 'dart', 'yaml', 'toml', 'c_sharp', 'c', 'cpp'
+    'python', 'lua', 'java', 'rust', 'json', 'html', 'css', 'javascript', 'dart', 'yaml', 'toml', 'c_sharp', 'c', 'cpp', 'kotlin'
   },
   highlight = {enable = true, additional_vim_regex_highlighting = false},
   incremental_selection = {
