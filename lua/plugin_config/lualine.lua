@@ -28,7 +28,7 @@ local config = {
   options = {
     component_separators = '',
     section_separators = '',
-    theme = 'tokyonight'
+    theme = 'nord'
     -- theme = {
       -- normal = {c = {fg = colors.fg, bg = colors.bg}},
       -- inactive = {c = {fg = colors.fg, bg = colors.bg}}

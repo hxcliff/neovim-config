@@ -1,8 +1,5 @@
 -- vim.cmd [[colorscheme dracula]]
--- vim.cmd [[colorscheme nord]]
-vim.cmd [[colorscheme tokyonight]]
--- vim.cmd [[colorscheme catppuccin]]
--- vim.cmd [[colorscheme onelight]]
+vim.cmd [[colorscheme nord]]
 
 vim.o.termguicolors = true
 -- utf8
