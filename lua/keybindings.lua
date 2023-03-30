@@ -29,9 +29,9 @@ map('n', '<leader>l', ':HopLine<CR>', opt)
 -- map('n', '<leader>u', ':MundoToggle<CR>', opt)
 -- map('n', '<leader>e', ':NvimTreeToggle<CR>', opt)
 
-map('n', '<leader>f', ':Telescope find_files theme=dropdown<CR>', opt)
+map('n', ',f', ':Telescope find_files theme=dropdown<CR>', opt)
 map('n', ',w', ':Telescope live_grep theme=dropdown<CR>', opt)
-map('n', '<leader>e', ':Telescope buffers theme=dropdown<CR>', opt)
+map('n', ',b', ':Telescope buffers theme=dropdown<CR>', opt)
 
 
 local pluginKeys = {}
@@ -48,7 +48,7 @@ pluginKeys.mapLSP = function(mapbuf)
   mapbuf('n', 'go', '<cmd>Lspsaga show_line_diagnostics<CR>', opt)
   mapbuf('n', 'gk', '<cmd>Lspsaga diagnostic_jump_prev<CR>', opt)
   mapbuf('n', 'gj', '<cmd>Lspsaga diagnostic_jump_next<CR>', opt)
-  mapbuf('n', 'gf', '<cmd>lua vim.lsp.buf.format()<CR>', {noremap = true})
+  mapbuf('n', '<leader>f', '<cmd>lua vim.lsp.buf.format()<CR>', {noremap = true})
 end
 
 pluginKeys.cmp = function(cmp)
