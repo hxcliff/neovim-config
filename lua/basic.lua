@@ -1,5 +1,4 @@
--- vim.cmd [[colorscheme dracula]]
-vim.cmd [[colorscheme nord]]
+vim.cmd [[colorscheme dracula]]
 
 vim.o.termguicolors = true
 -- utf8

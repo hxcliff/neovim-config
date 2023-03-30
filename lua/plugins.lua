@@ -4,10 +4,6 @@ return require('packer').startup(function(use)
     'dracula/vim',
     as = 'dracula'
   }
-  use {
-    'shaunsingh/nord.nvim',
-    as = 'nord'
-  }
   use 'nvim-tree/nvim-web-devicons'
   use {'nvim-lualine/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true}}
   use 'arkav/lualine-lsp-progress'
