@@ -5,7 +5,7 @@ return require('packer').startup(function(use)
     as = 'dracula'
   }
   use 'nvim-tree/nvim-web-devicons'
-  use {'nvim-lualine/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true}}
+  use 'nvim-lualine/lualine.nvim'
   use 'arkav/lualine-lsp-progress'
   use {
     'nvim-treesitter/nvim-treesitter',
@@ -44,19 +44,6 @@ return require('packer').startup(function(use)
   use 'saadparwaiz1/cmp_luasnip'
   use 'L3MON4D3/LuaSnip'
   use 'rafamadriz/friendly-snippets'
-  use({
-    "glepnir/lspsaga.nvim",
-    opt = true,
-    branch = "main",
-    event = "LspAttach",
-    config = function()
-      require("lspsaga").setup({})
-    end,
-    requires = {
-      {"nvim-tree/nvim-web-devicons"},
-      {"nvim-treesitter/nvim-treesitter"}
-    }
-  })
   use 'onsails/lspkind-nvim'
   use {
     "zbirenbaum/neodim",
