@@ -28,11 +28,7 @@ local config = {
   options = {
     component_separators = '',
     section_separators = '',
-    theme = 'sonokai'
-    -- theme = {
-      -- normal = {c = {fg = colors.fg, bg = colors.bg}},
-      -- inactive = {c = {fg = colors.fg, bg = colors.bg}}
-    -- }
+    theme = 'nightfox'
   },
   sections = {
     lualine_a = {},
