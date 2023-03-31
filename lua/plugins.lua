@@ -1,12 +1,11 @@
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
   use {
-    'dracula/vim',
-    as = 'dracula'
+    'sainnhe/sonokai',
+    as = 'sonokai'
   }
   use 'nvim-tree/nvim-web-devicons'
   use 'nvim-lualine/lualine.nvim'
-  use 'arkav/lualine-lsp-progress'
   use {
     'nvim-treesitter/nvim-treesitter',
     run = function() require('nvim-treesitter.install').update {with_sync = true} end
@@ -58,5 +57,9 @@ return require('packer').startup(function(use)
         }
       })
     end
+  }
+  use {
+    'j-hui/fidget.nvim',
+    config = function() require"fidget".setup{} end
   }
 end)

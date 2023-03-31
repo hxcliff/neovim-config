@@ -1,4 +1,4 @@
-vim.cmd [[colorscheme dracula]]
+vim.cmd [[colorscheme sonokai]]
 
 vim.o.termguicolors = true
 -- utf8
