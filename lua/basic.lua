@@ -1,4 +1,4 @@
-vim.cmd [[colorscheme sonokai]]
+vim.cmd("colorscheme duskfox")
 
 vim.o.termguicolors = true
 -- utf8

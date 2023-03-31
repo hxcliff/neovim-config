@@ -1,9 +1,6 @@
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
-  use {
-    'sainnhe/sonokai',
-    as = 'sonokai'
-  }
+  use 'EdenEast/nightfox.nvim'
   use 'nvim-tree/nvim-web-devicons'
   use 'nvim-lualine/lualine.nvim'
   use {
