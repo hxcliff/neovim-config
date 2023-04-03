@@ -1,4 +1,4 @@
-vim.cmd("colorscheme duskfox")
+vim.cmd("colorscheme tokyonight-night")
 
 vim.o.termguicolors = true
 -- utf8

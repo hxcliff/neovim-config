@@ -1,6 +1,6 @@
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
-  use 'EdenEast/nightfox.nvim'
+  use 'folke/tokyonight.nvim'
   use 'nvim-tree/nvim-web-devicons'
   use 'nvim-lualine/lualine.nvim'
   use {
@@ -59,4 +59,5 @@ return require('packer').startup(function(use)
     'j-hui/fidget.nvim',
     config = function() require"fidget".setup{} end
   }
+  use 'lukas-reineke/indent-blankline.nvim'
 end)
