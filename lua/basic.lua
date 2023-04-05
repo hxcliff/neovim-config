@@ -1,6 +1,5 @@
-vim.cmd("colorscheme tokyonight-night")
+vim.cmd('colorscheme tokyonight')
 
-vim.o.termguicolors = true
 -- utf8
 vim.g.encoding = 'UTF-8'
 vim.o.fileencoding = 'utf-8'
@@ -68,12 +67,12 @@ vim.o.splitright = true
 -- 自动补全不自动选中
 vim.g.completeopt = 'menu,menuone,noselect,noinsert'
 -- 样式
-vim.o.background = 'dark'
+vim.o.background = 'light'
 vim.o.termguicolors = true
 vim.opt.termguicolors = true
 -- 不可见字符的显示，这里只把空格显示为一个点
 vim.o.list = true
-vim.o.listchars = "space:·"
+vim.o.listchars = 'space:·'
 -- 补全增强
 vim.o.wildmenu = true
 -- Dont' pass messages to |ins-completin menu|

@@ -5,12 +5,12 @@ return require('packer').startup(function(use)
   use 'nvim-lualine/lualine.nvim'
   use {
     'nvim-treesitter/nvim-treesitter',
-    run = function() require('nvim-treesitter.install').update {with_sync = true} end
+    run = function() require('nvim-treesitter.install').update({with_sync = true}) end
   }
   use {
     'phaazon/hop.nvim',
     branch = 'v2',
-    config = function() require'hop'.setup {keys = 'etovxqpdygfblzhckisuran'} end
+    config = function() require('hop').setup({keys = 'etovxqpdygfblzhckisuran'}) end
   }
   use {
     'PHSix/faster.nvim',
@@ -27,7 +27,7 @@ return require('packer').startup(function(use)
   }
   use {
     'windwp/nvim-autopairs',
-    config = function() require('nvim-autopairs').setup {} end
+    config = function() require('nvim-autopairs').setup({}) end
   }
   use 'neovim/nvim-lspconfig'
   use 'simrat39/rust-tools.nvim'
@@ -57,7 +57,7 @@ return require('packer').startup(function(use)
   }
   use {
     'j-hui/fidget.nvim',
-    config = function() require"fidget".setup{} end
+    config = function() require('fidget').setup({}) end
   }
   use 'lukas-reineke/indent-blankline.nvim'
 end)
