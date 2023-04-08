@@ -1,4 +1,4 @@
-vim.cmd('colorscheme tokyonight')
+vim.cmd('colorscheme tokyonight-night')
 
 -- utf8
 vim.g.encoding = 'UTF-8'
@@ -67,7 +67,6 @@ vim.o.splitright = true
 -- 自动补全不自动选中
 vim.g.completeopt = 'menu,menuone,noselect,noinsert'
 -- 样式
-vim.o.background = 'light'
 vim.o.termguicolors = true
 vim.opt.termguicolors = true
 -- 不可见字符的显示，这里只把空格显示为一个点
@@ -92,7 +91,7 @@ vim.api.nvim_create_autocmd('FileType', {
     local ft = vim.api.nvim_buf_get_option(bufnr, 'filetype')
 
     local width = 4
-    if ft == 'dart' or ft == 'javascript' or ft == 'lua' then
+    if ft == 'dart' or ft == 'javascript' or ft == 'lua' or ft == 'c' or ft == 'cpp' then
       width = 2
     end
 

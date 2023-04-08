@@ -33,6 +33,9 @@ map('n', ',f', ':Telescope find_files<CR>', opt)
 map('n', ',w', ':Telescope live_grep<CR>', opt)
 map('n', ',b', ':Telescope buffers<CR>', opt)
 
+map("n", "<A-h>", ":BufferLineCyclePrev<CR>", opt)
+map("n", "<A-l>", ":BufferLineCycleNext<CR>", opt)
+map("n", "<A-w>", ":BufferLinePickClose<CR>", opt)
 
 local pluginKeys = {}
 
