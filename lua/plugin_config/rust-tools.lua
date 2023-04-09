@@ -9,6 +9,17 @@ rt.setup({
     end,
     settings = {
       ['rust-analyzer'] = {
+        checkOnSave = {
+          enable = true
+        },
+        diagnostics = {
+          experimental = {
+            enable = true
+          }
+        },
+        files = {
+          watcher = "server"
+        },
         cargo = {
           -- target = "wasm32-unknown-unknown"
         }
