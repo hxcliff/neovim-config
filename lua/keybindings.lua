@@ -37,6 +37,8 @@ map("n", "<A-h>", ":BufferLineCyclePrev<CR>", opt)
 map("n", "<A-l>", ":BufferLineCycleNext<CR>", opt)
 map("n", "<A-w>", ":BufferLinePickClose<CR>", opt)
 
+map("n", "<A-t>", ":ToggleTerm<CR>", opt)
+
 local pluginKeys = {}
 
 pluginKeys.mapLSP = function(mapbuf)
