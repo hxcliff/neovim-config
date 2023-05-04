@@ -1,6 +1,6 @@
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
-  use 'folke/tokyonight.nvim'
+  use { "catppuccin/nvim", as = "catppuccin" }
   use 'nvim-tree/nvim-web-devicons'
   use 'nvim-lualine/lualine.nvim'
   use {
