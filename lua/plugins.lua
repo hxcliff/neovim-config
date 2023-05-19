@@ -1,6 +1,6 @@
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
-  use { "catppuccin/nvim", as = "catppuccin" }
+  use { 'catppuccin/nvim', as = 'catppuccin' }
   use 'nvim-tree/nvim-web-devicons'
   use 'nvim-lualine/lualine.nvim'
   use {
@@ -42,15 +42,15 @@ return require('packer').startup(function(use)
   use 'rafamadriz/friendly-snippets'
   use 'onsails/lspkind-nvim'
   use {
-    "zbirenbaum/neodim",
-    event = "LspAttach",
-    config = function ()
-      require("neodim").setup({
+    'zbirenbaum/neodim',
+    event = 'LspAttach',
+    config = function()
+      require('neodim').setup({
         alpha = 0.5,
         hide = {
           virtual_text = true,
           signs = false,
-          underline = false,
+          underline = false
         }
       })
     end
@@ -62,6 +62,6 @@ return require('packer').startup(function(use)
   use 'lukas-reineke/indent-blankline.nvim'
   use {
     'akinsho/bufferline.nvim',
-    tag = "v3.*"
+    tag = 'v3.*'
   }
 end)
