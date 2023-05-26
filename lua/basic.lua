@@ -90,7 +90,7 @@ vim.api.nvim_create_autocmd('FileType', {
     local ft = vim.api.nvim_buf_get_option(bufnr, 'filetype')
 
     local width = 4
-    if ft == 'dart' or ft == 'javascript' or ft == 'lua' or ft == 'c' or ft == 'cpp' then
+    if ft == 'dart' or ft == 'javascript' or ft == 'lua' or ft == 'c' or ft == 'cpp' or ft == 'yaml' then
       width = 2
     end
 
