@@ -1,4 +1,4 @@
-vim.cmd('colorscheme catppuccin-macchiato')
+vim.cmd('colorscheme catppuccin-frappe')
 
 -- utf8
 vim.g.encoding = 'UTF-8'
