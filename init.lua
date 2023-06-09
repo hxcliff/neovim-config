@@ -2,7 +2,6 @@ require('basic')
 require('keybindings')
 
 require('plugins')
-require('plugin_config/vscode')
 require('plugin_config/bufferline')
 require('plugin_config/lualine')
 require('plugin_config/indent-blankline')
