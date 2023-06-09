@@ -58,7 +58,13 @@ return require('packer').startup(function(use)
   }
   use {
     'j-hui/fidget.nvim',
-    config = function() require('fidget').setup({}) end
+    config = function()
+      require('fidget').setup({
+        window = {
+          blend = 0
+        }
+      })
+    end
   }
   use 'lukas-reineke/indent-blankline.nvim'
   use {
