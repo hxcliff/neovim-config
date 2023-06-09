@@ -1,6 +1,7 @@
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
   use 'projekt0n/github-nvim-theme'
+  use 'Mofiqul/vscode.nvim'
   use 'nvim-tree/nvim-web-devicons'
   use 'nvim-lualine/lualine.nvim'
   use {

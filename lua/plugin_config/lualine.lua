@@ -28,7 +28,7 @@ local config = {
   options = {
     component_separators = '',
     section_separators = '',
-    theme = 'github_dark'
+    theme = 'vscode'
   },
   sections = {
     lualine_a = {},

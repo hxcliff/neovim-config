@@ -1,4 +1,4 @@
-vim.cmd('colorscheme github_dark')
+vim.o.background = 'dark'
 
 -- utf8
 vim.g.encoding = 'UTF-8'
