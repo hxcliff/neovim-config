@@ -1,4 +1,4 @@
-vim.cmd('colorscheme catppuccin-frappe')
+vim.cmd('colorscheme github_dark')
 
 -- utf8
 vim.g.encoding = 'UTF-8'
