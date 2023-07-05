@@ -86,7 +86,7 @@ vim.o.cursorcolumn = true
 
 vim.api.nvim_create_autocmd('FileType', {
   pattern = '*',
-  callback = function ()
+  callback = function()
     local bufnr = vim.api.nvim_get_current_buf()
     local ft = vim.api.nvim_buf_get_option(bufnr, 'filetype')
 
