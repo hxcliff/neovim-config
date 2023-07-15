@@ -38,3 +38,15 @@ lspconfig.lua_ls.setup({
 lspconfig.rust_analyzer.setup({
   on_attach = on_attach,
 })
+
+lspconfig.clangd.setup({
+  on_attach = on_attach,
+})
+
+lspconfig.jsonls.setup({
+  on_attach = on_attach,
+})
+
+lspconfig.tsserver.setup({
+  on_attach = on_attach,
+})

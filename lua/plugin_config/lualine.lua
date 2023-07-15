@@ -52,7 +52,7 @@ local function ins_left(component) table.insert(config.sections.lualine_c, compo
 
 local function ins_right(component) table.insert(config.sections.lualine_x, component) end
 
-ins_left {function() return '▊' end, color = {fg = colors.blue}, padding = {left = 0, right = 1}}
+ins_left { function() return '▊' end, color = { fg = colors.blue }, padding = { left = 0, right = 1 } }
 
 ins_left {
   function() return '' end,
@@ -79,62 +79,61 @@ ins_left {
       ['!'] = colors.red,
       t = colors.red
     }
-    return {fg = mode_color[vim.fn.mode()]}
+    return { fg = mode_color[vim.fn.mode()] }
   end,
-  padding = {right = 1}
+  padding = { right = 1 }
 }
 
-ins_left {'filesize', cond = conditions.buffer_not_empty}
+ins_left { 'filesize', cond = conditions.buffer_not_empty }
 
 ins_left {
   'filename',
   cond = conditions.buffer_not_empty,
-  color = {fg = colors.magenta, gui = 'bold'}
+  color = { fg = colors.magenta, gui = 'bold' }
 }
 
-ins_left {'location'}
+ins_left { 'location' }
 
 ins_left {
   'diagnostics',
-  sources = {'nvim_diagnostic'},
-  symbols = {error = ' ', warn = ' ', info = ' '},
+  sources = { 'nvim_diagnostic' },
+  symbols = { error = ' ', warn = ' ', info = ' ' },
   diagnostics_color = {
-    color_error = {fg = colors.red},
-    color_warn = {fg = colors.yellow},
-    color_info = {fg = colors.cyan}
+    color_error = { fg = colors.red },
+    color_warn = { fg = colors.yellow },
+    color_info = { fg = colors.cyan }
   }
 }
 
-ins_left {function() return '%=' end}
+ins_left { function() return '%=' end }
 
 ins_right {
   'o:encoding',
   fmt = string.upper,
   cond = conditions.hide_in_width,
-  color = {fg = colors.green, gui = 'bold'}
+  color = { fg = colors.green, gui = 'bold' }
 }
 
 ins_right {
   'fileformat',
   fmt = string.upper,
   icons_enabled = false,
-  color = {fg = colors.green, gui = 'bold'}
+  color = { fg = colors.green, gui = 'bold' }
 }
 
-ins_right {'branch', icon = '', color = {fg = colors.violet, gui = 'bold'}}
+ins_right { 'branch', icon = '', color = { fg = colors.violet, gui = 'bold' } }
 
 ins_right {
   'diff',
-  symbols = {added = ' ', modified = ' ', removed = ' '},
+  symbols = { added = ' ', modified = ' ', removed = ' ' },
   diff_color = {
-    added = {fg = colors.green},
-    modified = {fg = colors.orange},
-    removed = {fg = colors.red}
+    added = { fg = colors.green },
+    modified = { fg = colors.orange },
+    removed = { fg = colors.red }
   },
   cond = conditions.hide_in_width
 }
 
-ins_right {function() return '▊' end, color = {fg = colors.blue}, padding = {left = 1}}
+ins_right { function() return '▊' end, color = { fg = colors.blue }, padding = { left = 1 } }
 
 lualine.setup(config)
-
