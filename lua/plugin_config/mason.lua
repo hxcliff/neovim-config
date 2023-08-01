@@ -9,7 +9,7 @@ require('mason').setup({
 })
 
 require('mason-lspconfig').setup({
-  ensure_installed = { 'lua_ls', 'rust_analyzer' }
+  ensure_installed = {}
 })
 
 local lspconfig = require('lspconfig')
