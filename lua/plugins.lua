@@ -1,6 +1,7 @@
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
   use 'folke/tokyonight.nvim'
+  use 'nvim-lua/plenary.nvim'
   use 'nvim-tree/nvim-web-devicons'
   use 'nvim-lualine/lualine.nvim'
   use {
@@ -22,8 +23,7 @@ return require('packer').startup(function(use)
   }
   use {
     'nvim-telescope/telescope.nvim',
-    branch = '0.1.x',
-    requires = { 'nvim-lua/plenary.nvim' }
+    branch = '0.1.x'
   }
   use {
     'windwp/nvim-autopairs',
@@ -31,6 +31,7 @@ return require('packer').startup(function(use)
   }
   use 'neovim/nvim-lspconfig'
   use 'simrat39/rust-tools.nvim'
+  use 'akinsho/flutter-tools.nvim'
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
@@ -56,7 +57,6 @@ return require('packer').startup(function(use)
   }
   use {
     'j-hui/fidget.nvim',
-    tag = 'legacy',
     config = function() require('fidget').setup({}) end
   }
   use 'lukas-reineke/indent-blankline.nvim'

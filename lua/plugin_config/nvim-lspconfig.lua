@@ -34,3 +34,9 @@ require("rust-tools").setup({
     on_attach = on_attach,
   },
 })
+
+require("flutter-tools").setup({
+  lsp = {
+    on_attach = on_attach,
+  }
+})
