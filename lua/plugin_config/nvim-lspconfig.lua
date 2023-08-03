@@ -29,6 +29,10 @@ lspconfig.tsserver.setup({
   on_attach = on_attach,
 })
 
+lspconfig.yamlls.setup({
+  on_attach = on_attach,
+})
+
 require("rust-tools").setup({
   server = {
     on_attach = on_attach,
