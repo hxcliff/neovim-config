@@ -30,8 +30,7 @@ return require('packer').startup(function(use)
     config = function() require('nvim-autopairs').setup({}) end
   }
   use 'neovim/nvim-lspconfig'
-  use 'williamboman/mason.nvim'
-  use 'williamboman/mason-lspconfig.nvim'
+  use 'simrat39/rust-tools.nvim'
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
@@ -58,9 +57,7 @@ return require('packer').startup(function(use)
   use {
     'j-hui/fidget.nvim',
     tag = 'legacy',
-    config = function()
-      require('fidget').setup({})
-    end
+    config = function() require('fidget').setup({}) end
   }
   use 'lukas-reineke/indent-blankline.nvim'
   use {

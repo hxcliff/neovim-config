@@ -1,17 +1,3 @@
-require('mason').setup({
-  ui = {
-    icons = {
-      package_installed = "✓",
-      package_pending = "➜",
-      package_uninstalled = "✗"
-    }
-  }
-})
-
-require('mason-lspconfig').setup({
-  ensure_installed = {}
-})
-
 local lspconfig = require('lspconfig')
 
 local on_attach = function(_, bufnr)
@@ -35,18 +21,16 @@ lspconfig.lua_ls.setup({
   on_attach = on_attach,
 })
 
-lspconfig.rust_analyzer.setup({
-  on_attach = on_attach,
-})
-
-lspconfig.clangd.setup({
-  on_attach = on_attach,
-})
-
 lspconfig.jsonls.setup({
   on_attach = on_attach,
 })
 
 lspconfig.tsserver.setup({
   on_attach = on_attach,
+})
+
+require("rust-tools").setup({
+  server = {
+    on_attach = on_attach,
+  },
 })
