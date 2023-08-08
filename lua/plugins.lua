@@ -30,8 +30,13 @@ return require('packer').startup(function(use)
     config = function() require('nvim-autopairs').setup({}) end
   }
   use 'neovim/nvim-lspconfig'
-  use 'simrat39/rust-tools.nvim'
-  use 'akinsho/flutter-tools.nvim'
+  use({
+    'nvimdev/lspsaga.nvim',
+    after = 'nvim-lspconfig',
+    config = function()
+      require('lspsaga').setup({})
+    end,
+  })
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
@@ -43,7 +48,9 @@ return require('packer').startup(function(use)
   use 'onsails/lspkind-nvim'
   use {
     'zbirenbaum/neodim',
-    event = 'LspAttach',
+    after = 'nvim-lspconfig',
+    -- event = 'LspAttach',
+    branch = 'v2',
     config = function()
       require('neodim').setup({
         alpha = 0.5,
