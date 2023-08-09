@@ -39,7 +39,7 @@ return require('packer').startup(function(use)
           win_width = 35
         }
       })
-    end,
+    end
   })
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-nvim-lsp'
@@ -53,7 +53,6 @@ return require('packer').startup(function(use)
   use {
     'zbirenbaum/neodim',
     after = 'nvim-lspconfig',
-    -- event = 'LspAttach',
     branch = 'v2',
     config = function()
       require('neodim').setup({
