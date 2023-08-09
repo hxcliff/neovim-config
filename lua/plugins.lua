@@ -34,7 +34,11 @@ return require('packer').startup(function(use)
     'nvimdev/lspsaga.nvim',
     after = 'nvim-lspconfig',
     config = function()
-      require('lspsaga').setup({})
+      require('lspsaga').setup({
+        outline = {
+          win_width = 35
+        }
+      })
     end,
   })
   use 'hrsh7th/nvim-cmp'
