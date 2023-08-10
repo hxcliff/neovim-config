@@ -30,17 +30,6 @@ return require('packer').startup(function(use)
     config = function() require('nvim-autopairs').setup({}) end
   }
   use 'neovim/nvim-lspconfig'
-  use({
-    'nvimdev/lspsaga.nvim',
-    after = 'nvim-lspconfig',
-    config = function()
-      require('lspsaga').setup({
-        outline = {
-          win_width = 35
-        }
-      })
-    end
-  })
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
