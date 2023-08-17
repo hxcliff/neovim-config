@@ -1,20 +1,32 @@
-require('nvim-treesitter.configs').setup {
+require('nvim-treesitter.configs').setup({
   ensure_installed = {
     'python', 'lua', 'java', 'rust', 'json', 'html', 'css', 'javascript', 'dart', 'yaml', 'toml', 'c_sharp', 'c', 'cpp',
     'markdown', 'markdown_inline', 'kotlin'
   },
-  highlight = { enable = true, additional_vim_regex_highlighting = false },
-  incremental_selection = {
+  highlight = {
     enable = true,
-    keymaps = {
-      init_selection = '<CR>',
-      node_incremental = '<CR>',
-      node_decremental = '<BS>',
-      scope_incremental = '<TAB>'
-    }
+    additional_vim_regex_highlighting = false
   },
-  indent = { enable = true }
-}
+  indent = {
+    enable = true
+  },
+  textobjects = {
+    select = {
+      enable = true,
+      keymaps = {
+        ['af'] = '@function.outer',
+        ['if'] = '@function.inner',
+        ['ac'] = '@class.outer',
+        ['ic'] = { query = '@class.inner', desc = 'Select inner part of a class region' },
+        ['as'] = { query = '@scope', query_group = 'locals', desc = 'Select language scope' },
+      },
+      include_surrounding_whitespace = false
+    },
+    swap = {
+      enable = true
+    }
+  }
+})
 vim.wo.foldmethod = 'expr'
 vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
 vim.wo.foldlevel = 99
