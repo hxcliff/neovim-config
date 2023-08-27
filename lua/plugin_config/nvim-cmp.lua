@@ -8,11 +8,18 @@ cmp.setup {
   snippet = {
     expand = function(args) luasnip.lsp_expand(args.body) end
   },
-  sources = cmp.config.sources({ { name = 'nvim_lsp' }, { name = 'luasnip' } },
-    { { name = 'buffer' }, { name = 'path' } }),
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp' },
+    { name = 'luasnip' },
+    { name = "crates" }
+  }, {
+    { name = 'buffer' },
+    { name = 'path' }
+  }),
   mapping = require 'keybindings'.cmp(cmp),
   formatting = {
     format = lspkind.cmp_format({
+      mode = 'symbol',
       with_text = true,
       maxwidth = 50,
       before = function(entry, vim_item)
@@ -22,12 +29,23 @@ cmp.setup {
     })
   }
 }
-cmp.setup.cmdline('/', {
+cmp.setup.cmdline({ '/', '?' }, {
   completion = { autocomplete = false },
-  sources = { { name = 'buffer', opts = { keyword_pattern = [=[[^[:blank:]].*]=] } } }
+  sources = {
+    {
+      name = 'buffer',
+      opts = {
+        keyword_pattern = [=[[^[:blank:]].*]=]
+      }
+    }
+  }
 })
 
 cmp.setup.cmdline(':', {
   completion = { autocomplete = false },
-  sources = cmp.config.sources({ { name = 'path' } }, { { name = 'cmdline' } })
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    { name = 'cmdline' }
+  })
 })

@@ -90,7 +90,17 @@ end
 lspconfig.rust_analyzer.setup({
   on_attach = on_attach,
   capabilities = capabilities,
-  root_dir = get_root_dir
+  root_dir = get_root_dir,
+  settings = {
+    ['rust-analyzer'] = {
+      diagnostics = {
+        enable = false,
+      },
+      inlayHints = {
+        maxLength = 512
+      }
+    }
+  }
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {

@@ -73,4 +73,12 @@ return require('packer').startup(function(use)
       require('toggleterm').setup({})
     end
   }
+  use {
+    'saecki/crates.nvim',
+    tag = 'v0.3.0',
+    requires = { 'nvim-lua/plenary.nvim' },
+    config = function()
+      require('crates').setup()
+    end,
+  }
 end)
