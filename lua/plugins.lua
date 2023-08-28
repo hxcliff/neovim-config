@@ -60,11 +60,7 @@ return require('packer').startup(function(use)
     'j-hui/fidget.nvim',
     tag = "legacy",
     config = function()
-      require('fidget').setup({
-        window = {
-          blend = 0
-        }
-      })
+      require('fidget').setup({})
     end
   }
   use 'lukas-reineke/indent-blankline.nvim'
