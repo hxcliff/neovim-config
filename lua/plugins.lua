@@ -70,8 +70,13 @@ return require('packer').startup(function(use)
   use 'lukas-reineke/indent-blankline.nvim'
   use {
     'akinsho/bufferline.nvim',
-    after = "catppuccin",
-    tag = 'v3.*'
+    after = 'catppuccin',
+    tag = '*',
+    config = function()
+      require('bufferline').setup {
+        highlights = require('catppuccin.groups.integrations.bufferline').get()
+      }
+    end
   }
   use {
     'akinsho/toggleterm.nvim',
