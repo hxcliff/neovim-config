@@ -1,4 +1,4 @@
-vim.cmd('colorscheme tokyonight')
+vim.cmd('colorscheme catppuccin')
 vim.o.background = 'dark'
 
 -- utf8

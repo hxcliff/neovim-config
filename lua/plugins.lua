@@ -1,6 +1,6 @@
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
-  use 'folke/tokyonight.nvim'
+  use { "catppuccin/nvim", as = "catppuccin" }
   use 'nvim-lua/plenary.nvim'
   use 'nvim-tree/nvim-web-devicons'
   use 'nvim-lualine/lualine.nvim'
@@ -59,11 +59,18 @@ return require('packer').startup(function(use)
   use {
     'j-hui/fidget.nvim',
     tag = "legacy",
-    config = function() require('fidget').setup({}) end
+    config = function()
+      require('fidget').setup({
+        window = {
+          blend = 0
+        }
+      })
+    end
   }
   use 'lukas-reineke/indent-blankline.nvim'
   use {
     'akinsho/bufferline.nvim',
+    after = "catppuccin",
     tag = 'v3.*'
   }
   use {
@@ -76,7 +83,6 @@ return require('packer').startup(function(use)
   use {
     'saecki/crates.nvim',
     tag = 'v0.3.0',
-    requires = { 'nvim-lua/plenary.nvim' },
     config = function()
       require('crates').setup()
     end,
