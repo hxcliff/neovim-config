@@ -19,9 +19,6 @@ map('n', '<leader>3', '3gt<ct>', opt)
 map('n', '<leader>4', '4gt<ct>', opt)
 map('n', '<leader>5', '5gt<ct>', opt)
 
-map('n', '<leader>w', ':HopWord<CR>', opt)
-map('n', '<leader>l', ':HopLine<CR>', opt)
-
 map('n', ',f', ':Telescope find_files<CR>', opt)
 map('n', ',w', ':Telescope live_grep<CR>', opt)
 map('n', ',b', ':Telescope buffers<CR>', opt)
