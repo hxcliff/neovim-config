@@ -1,6 +1,6 @@
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
-  use { "catppuccin/nvim", as = "catppuccin" }
+  use 'folke/tokyonight.nvim'
   use 'nvim-lua/plenary.nvim'
   use 'nvim-tree/nvim-web-devicons'
   use 'nvim-lualine/lualine.nvim'
@@ -51,7 +51,7 @@ return require('packer').startup(function(use)
         hide = {
           virtual_text = true,
           signs = false,
-          underline = false
+          underline = false,
         }
       })
     end
@@ -66,12 +66,9 @@ return require('packer').startup(function(use)
   use 'lukas-reineke/indent-blankline.nvim'
   use {
     'akinsho/bufferline.nvim',
-    after = 'catppuccin',
     tag = '*',
     config = function()
-      require('bufferline').setup {
-        highlights = require('catppuccin.groups.integrations.bufferline').get()
-      }
+      require('bufferline').setup({})
     end
   }
   use {
@@ -85,7 +82,7 @@ return require('packer').startup(function(use)
     'saecki/crates.nvim',
     tag = 'v0.3.0',
     config = function()
-      require('crates').setup()
+      require('crates').setup({})
     end,
   }
 end)

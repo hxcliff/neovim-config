@@ -1,4 +1,4 @@
-vim.cmd('colorscheme catppuccin')
+vim.cmd('colorscheme tokyonight')
 vim.o.background = 'dark'
 
 -- utf8
@@ -72,7 +72,7 @@ vim.o.termguicolors = true
 -- 不可见字符的显示，这里只把空格显示为一个点
 vim.o.list = true
 -- vim.o.listchars = 'space:·,eol:↴'
-vim.o.listchars = 'space: '
+-- vim.o.listchars = 'space: '
 -- 补全增强
 vim.o.wildmenu = true
 -- Dont' pass messages to |ins-completin menu|
@@ -103,4 +103,9 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.o.shiftwidth = width
     vim.bo.shiftwidth = width
   end,
+})
+
+vim.diagnostic.config({
+  virtual_text = false,
+  severity_sort = true
 })
