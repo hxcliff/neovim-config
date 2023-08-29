@@ -34,6 +34,10 @@ lspconfig.yamlls.setup({
   on_attach = on_attach,
 })
 
+lspconfig.dartls.setup({
+  on_attach = on_attach,
+})
+
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.experimental = {
@@ -94,7 +98,7 @@ lspconfig.rust_analyzer.setup({
   settings = {
     ['rust-analyzer'] = {
       diagnostics = {
-        enable = false,
+        enable = true,
       },
       inlayHints = {
         maxLength = 512
