@@ -1,7 +1,8 @@
 local lspconfig = require('lspconfig')
 local lspconfig_utils = require("lspconfig.util")
+local methods = vim.lsp.protocol.Methods
 
-local on_attach = function(_, bufnr)
+local on_attach = function(client, bufnr)
   local opt = { noremap = true, silent = true }
   local function mapbuf(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 
@@ -16,6 +17,31 @@ local on_attach = function(_, bufnr)
   mapbuf('n', 'gk', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opt)
   mapbuf('n', 'gj', '<cmd>lua vim.diagnostic.goto_next()<CR>', opt)
   mapbuf('n', '<leader>f', '<cmd>lua vim.lsp.buf.format({ async = false })<CR>', { noremap = true })
+
+  if client.supports_method(methods.textDocument_inlayHint) then
+    local inlay_hints_group = vim.api.nvim_create_augroup('ToggleInlayHints', { clear = false })
+
+    vim.defer_fn(function()
+      local mode = vim.api.nvim_get_mode().mode
+      vim.lsp.inlay_hint(bufnr, mode == 'n' or mode == 'v')
+    end, 250)
+
+    vim.api.nvim_create_autocmd('InsertEnter', {
+      group = inlay_hints_group,
+      buffer = bufnr,
+      callback = function()
+        vim.lsp.inlay_hint(bufnr, false)
+      end
+    })
+
+    vim.api.nvim_create_autocmd('InsertLeave', {
+      group = inlay_hints_group,
+      buffer = bufnr,
+      callback = function()
+        vim.lsp.inlay_hint(bufnr, true)
+      end
+    })
+  end
 end
 
 lspconfig.lua_ls.setup({
@@ -145,12 +171,12 @@ lspconfig.rust_analyzer.setup({
   }
 })
 
-vim.api.nvim_create_autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-  callback = function(args)
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-    if client.server_capabilities.inlayHintProvider then
-      -- vim.lsp.inlay_hint(args.buf, true)
-    end
-  end
-})
+--vim.api.nvim_create_autocmd("LspAttach", {
+--  group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+--  callback = function(args)
+--    local client = vim.lsp.get_client_by_id(args.data.client_id)
+--    if client.server_capabilities.inlayHintProvider then
+--      vim.lsp.inlay_hint(args.buf, true)
+--    end
+--  end
+--})
