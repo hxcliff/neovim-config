@@ -34,34 +34,48 @@ lspconfig.yamlls.setup({
   on_attach = on_attach,
 })
 
+
+local function get_dart_root_dir(filename)
+  local ROOT_PATTERNS = { ".git", "pubspec.yaml" }
+
+  local client = vim.lsp.get_active_clients({ name = 'dartls', bufnr = bufnr })[1]
+  local root_dir = client and client.config.root_dir or nil
+  if root_dir then return root_dir end
+
+  local buf = vim.api.nvim_get_current_buf()
+  local buf_path = vim.api.nvim_buf_get_name(buf)
+
+  return root_dir or vim.fs.dirname(vim.fs.find(ROOT_PATTERNS, {
+    path = buf_path,
+    upward = true,
+  })[1])
+end
+
 lspconfig.dartls.setup({
   on_attach = on_attach,
+  root_dir = get_dart_root_dir,
+  settings = {
+    dart = {
+      completeFunctionCalls = true,
+      showTodos = true,
+      analysisExcludedFolders = {},
+      updateImportsOnRename = true,
+    },
+  },
+  capabilities = (function()
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities.workspace.configuration = true
+    capabilities.workspace.workspaceEdit.documentChanges = true
+    capabilities.textDocument.completion.completionItem.snippetSupport = true
+    capabilities.textDocument.documentColor = { dynamicRegistration = true }
+    capabilities.textDocument.completion.completionItem.resolveSupport = {
+      properties = { "documentation", "detail", "additionalTextEdits" },
+    }
+    return capabilities
+  end)()
 })
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.experimental = {
-  hoverActions = true,
-  hoverRange = true,
-  serverStatusNotification = true,
-  snippetTextEdit = true,
-  codeActionGroup = true,
-  ssr = true,
-}
-capabilities.textDocument.completion.completionItem.resolveSupport = {
-  properties = { "documentation", "detail", "additionalTextEdits" },
-}
-capabilities.experimental.commands = {
-  commands = {
-    "rust-analyzer.runSingle",
-    "rust-analyzer.debugSingle",
-    "rust-analyzer.showReferences",
-    "rust-analyzer.gotoLocation",
-    "editor.action.triggerParameterHints",
-  },
-}
-
-local function get_root_dir(filename)
+local function get_rust_root_dir(filename)
   local fname = filename or vim.api.nvim_buf_get_name(0)
   local cargo_crate_dir = lspconfig_utils.root_pattern("Cargo.toml")(fname)
   local cmd = { "cargo", "metadata", "--no-deps", "--format-version", "1" }
@@ -93,8 +107,32 @@ end
 
 lspconfig.rust_analyzer.setup({
   on_attach = on_attach,
-  capabilities = capabilities,
-  root_dir = get_root_dir,
+  root_dir = get_rust_root_dir,
+  capabilities = (function()
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities.textDocument.completion.completionItem.snippetSupport = true
+    capabilities.experimental = {
+      hoverActions = true,
+      hoverRange = true,
+      serverStatusNotification = true,
+      snippetTextEdit = true,
+      codeActionGroup = true,
+      ssr = true
+    }
+    capabilities.textDocument.completion.completionItem.resolveSupport = {
+      properties = { "documentation", "detail", "additionalTextEdits" },
+    }
+    capabilities.experimental.commands = {
+      commands = {
+        "rust-analyzer.runSingle",
+        "rust-analyzer.debugSingle",
+        "rust-analyzer.showReferences",
+        "rust-analyzer.gotoLocation",
+        "editor.action.triggerParameterHints",
+      }
+    }
+    return capabilities
+  end)(),
   settings = {
     ['rust-analyzer'] = {
       diagnostics = {
