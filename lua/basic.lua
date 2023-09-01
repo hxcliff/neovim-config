@@ -15,7 +15,7 @@ vim.wo.cursorline = true
 -- 左侧图标指示列
 vim.wo.signcolumn = 'yes'
 -- 右侧参考线
-vim.wo.colorcolumn = '100'
+vim.wo.colorcolumn = '80'
 -- 缩进4个空格
 vim.o.tabstop = 4
 vim.bo.tabstop = 4
