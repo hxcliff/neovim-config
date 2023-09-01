@@ -6,5 +6,10 @@ neo_tree.setup({
   window = {
     position = 'left',
     width = 40
+  },
+  filesystem = {
+    follow_current_file = {
+      enabled = true
+    }
   }
 })
