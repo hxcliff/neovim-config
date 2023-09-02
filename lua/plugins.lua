@@ -84,5 +84,11 @@ require('lazy').setup({
       'nvim-lua/plenary.nvim',
       'MunifTanjim/nui.nvim',
     }
+  },
+  {
+    'lewis6991/gitsigns.nvim',
+    config = function()
+      require('gitsigns').setup({})
+    end
   }
 })
