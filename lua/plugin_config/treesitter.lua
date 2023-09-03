@@ -1,4 +1,6 @@
-require('nvim-treesitter.configs').setup({
+local treesitter = require('nvim-treesitter.configs')
+
+treesitter.setup({
   ensure_installed = {
     'python', 'lua', 'java', 'rust', 'json', 'html', 'css', 'javascript', 'dart', 'yaml', 'toml', 'c_sharp', 'c', 'cpp',
     'markdown', 'markdown_inline', 'kotlin'
@@ -27,6 +29,7 @@ require('nvim-treesitter.configs').setup({
     }
   }
 })
+
 vim.wo.foldmethod = 'expr'
 vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
 vim.wo.foldlevel = 99
