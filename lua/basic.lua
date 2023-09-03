@@ -85,6 +85,22 @@ vim.g.mouse = 'a'
 vim.g.undofile = true
 vim.o.cursorcolumn = true
 
+vim.diagnostic.config({
+  virtual_text = false,
+  severity_sort = true
+})
+
+vim.api.nvim_create_autocmd({ 'VimEnter' }, {
+  pattern = '*',
+  nested = true,
+  callback = function()
+    local timer = vim.loop.new_timer()
+    timer:start(100, 0, vim.schedule_wrap(function()
+      vim.cmd("Neotree show")
+    end))
+  end
+})
+
 vim.api.nvim_create_autocmd('FileType', {
   pattern = '*',
   callback = function()
@@ -103,9 +119,4 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.o.shiftwidth = width
     vim.bo.shiftwidth = width
   end
-})
-
-vim.diagnostic.config({
-  virtual_text = false,
-  severity_sort = true
 })

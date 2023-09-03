@@ -60,7 +60,11 @@ lspconfig.yamlls.setup({
   on_attach = on_attach,
 })
 
-local function get_dart_root_dir(filename)
+lspconfig.clangd.setup({
+  on_attach = on_attach,
+})
+
+local function get_dart_root_dir(_)
   local ROOT_PATTERNS = { ".git", "pubspec.yaml" }
 
   local client = vim.lsp.get_active_clients({ name = 'dartls', bufnr = bufnr })[1]
