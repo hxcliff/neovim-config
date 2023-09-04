@@ -15,7 +15,6 @@ require('lazy').setup({
       require('treesitter-context').setup({})
     end
   },
-  'nvim-treesitter/nvim-treesitter-refactor',
   'folke/flash.nvim',
   {
     'PHSix/faster.nvim',
