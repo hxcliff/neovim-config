@@ -18,17 +18,19 @@ local on_attach = function(client, bufnr)
   mapbuf('n', 'gj', '<cmd>lua vim.diagnostic.goto_next()<CR>', opt)
   mapbuf('n', '<leader>f', '<cmd>lua vim.lsp.buf.format({ async = false })<CR>', { noremap = true })
 
-  vim.api.nvim_create_augroup('DocumentHighlight', { clear = false })
-  vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-    group = 'DocumentHighlight',
-    buffer = bufnr,
-    callback = vim.lsp.buf.document_highlight,
-  })
-  vim.api.nvim_create_autocmd('CursorMoved', {
-    group = 'DocumentHighlight',
-    buffer = bufnr,
-    callback = vim.lsp.buf.clear_references,
-  })
+  if client.server_capabilities.documentHighlightProvider then
+    vim.api.nvim_create_augroup('DocumentHighlight', { clear = false })
+    vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+      group = 'DocumentHighlight',
+      buffer = bufnr,
+      callback = vim.lsp.buf.document_highlight,
+    })
+    vim.api.nvim_create_autocmd('CursorMoved', {
+      group = 'DocumentHighlight',
+      buffer = bufnr,
+      callback = vim.lsp.buf.clear_references,
+    })
+  end
 
   if client.supports_method(methods.textDocument_inlayHint) then
     local inlay_hints_group = vim.api.nvim_create_augroup('ToggleInlayHints', { clear = false })
