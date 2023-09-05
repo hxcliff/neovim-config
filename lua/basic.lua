@@ -90,17 +90,6 @@ vim.diagnostic.config({
   severity_sort = true
 })
 
-vim.api.nvim_create_autocmd({ 'VimEnter' }, {
-  pattern = '*',
-  nested = true,
-  callback = function()
-    local timer = vim.loop.new_timer()
-    timer:start(100, 0, vim.schedule_wrap(function()
-      vim.cmd("Neotree show")
-    end))
-  end
-})
-
 vim.api.nvim_create_autocmd('FileType', {
   pattern = '*',
   callback = function()
