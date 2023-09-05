@@ -5,8 +5,6 @@ local opt = { noremap = true, silent = true }
 
 map('v', '<C-y>', '"+y', opt)
 map('i', '<C-f>', '<Right>', opt)
-map('n', '<leader>x', '<C-w>c', opt)
-map('n', '<leader>t', '<C-w>T', opt)
 
 map('v', '<', '<gv', opt)
 map('v', '>', '>gv', opt)
