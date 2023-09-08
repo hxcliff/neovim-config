@@ -187,3 +187,21 @@ lspconfig.rust_analyzer.setup({
     }
   }
 })
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+  pattern = "*/Cargo.toml",
+  callback = function()
+    local clients = vim.lsp.get_active_clients()
+
+    for _, client in ipairs(clients) do
+      if client.name == "rust_analyzer" then
+        client.request("rust-analyzer/reloadWorkspace", nil, function(err)
+          if err then
+            error(tostring(err))
+          end
+        end, 0)
+      end
+    end
+  end,
+  group = vim.api.nvim_create_augroup("RustReload", { clear = true }),
+})
