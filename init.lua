@@ -16,6 +16,7 @@ require('keybindings')
 
 require('plugins')
 require('plugin_config/flash')
+-- require('plugin_config/noice')
 require('plugin_config/telescope')
 require('plugin_config/bufferline')
 require('plugin_config/lualine')
