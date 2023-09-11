@@ -63,7 +63,7 @@ cmp.setup.cmdline({ '/', '?' }, {
   sources = {
     {
       name = 'buffer',
-      opts = {
+      option = {
         keyword_pattern = [=[[^[:blank:]].*]=]
       }
     }

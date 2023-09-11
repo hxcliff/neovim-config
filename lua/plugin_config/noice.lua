@@ -4,25 +4,47 @@ require('noice').setup({
       cmdline = { icon = ':' },
       search_down = { icon = ' 󰁝' },
       search_up = { icon = ' 󰁅' },
-      -- filter = { icon = '!' },
-      lua = { icon = '󰢱' },
-      help = { icon = '󰋖' },
-    },
+      filter = { title = ' Command ', icon = '!' },
+      lua = { icon = 'L' },
+      help = { icon = '?' }
+    }
   },
   views = {
-    popupmenu = {
-      border = { style = 'single' },
+    popup = {
+      border = {
+        style = 'single'
+      }
+    },
+    hover = {
+      border = {
+        style = 'single'
+      }
+    },
+    cmdline = {
+      border = {
+        style = 'single'
+      }
+    },
+    mini = {
+      border = {
+        style = 'single'
+      }
+    },
+    cmdline_popup = {
+      border = {
+        style = 'single'
+      }
+    },
+    confirm = {
+      border = {
+        style = 'single'
+      }
     }
   },
   lsp = {
     progress = {
       enabled = false
-    },
-    override = {
-      ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
-      ['vim.lsp.util.stylize_markdown'] = true,
-      ['cmp.entry.get_documentation'] = true,
-    },
+    }
   },
   presets = {
     bottom_search = false,

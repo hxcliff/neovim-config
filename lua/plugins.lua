@@ -3,6 +3,7 @@ require('lazy').setup({
   'folke/tokyonight.nvim',
   'nvim-lua/plenary.nvim',
   'nvim-tree/nvim-web-devicons',
+  'MunifTanjim/nui.nvim',
   'nvim-lualine/lualine.nvim',
   {
     'nvim-treesitter/nvim-treesitter',
@@ -85,11 +86,7 @@ require('lazy').setup({
   },
   {
     'nvim-neo-tree/neo-tree.nvim',
-    branch = 'v3.x',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'MunifTanjim/nui.nvim',
-    }
+    branch = 'v3.x'
   },
   {
     'lewis6991/gitsigns.nvim',
@@ -97,12 +94,9 @@ require('lazy').setup({
       require('gitsigns').setup({})
     end
   },
+  'rcarriga/nvim-notify',
   {
     'folke/noice.nvim',
-    event = 'VeryLazy',
-    dependencies = {
-      'MunifTanjim/nui.nvim',
-      'rcarriga/nvim-notify',
-    }
+    event = 'VeryLazy'
   }
 })
