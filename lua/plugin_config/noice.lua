@@ -22,7 +22,7 @@ require('noice').setup({
     },
     cmdline = {
       border = {
-        style = 'single'
+        style = 'none'
       }
     },
     mini = {
