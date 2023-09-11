@@ -98,5 +98,6 @@ require('lazy').setup({
   {
     'folke/noice.nvim',
     event = 'VeryLazy'
-  }
+  },
+  'stevearc/dressing.nvim'
 })
