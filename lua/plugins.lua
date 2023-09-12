@@ -1,6 +1,12 @@
 require('lazy').setup({
-  'wbthomason/packer.nvim',
-  'folke/tokyonight.nvim',
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.cmd([[colorscheme tokyonight]])
+    end
+  },
   'nvim-lua/plenary.nvim',
   'nvim-tree/nvim-web-devicons',
   'MunifTanjim/nui.nvim',
