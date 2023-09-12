@@ -1,4 +1,8 @@
 local dressing = require('dressing')
+local themes = require('telescope.themes')
+
+local dropdown = themes.get_dropdown()
+dropdown.borderchars = { '─', '│', '─', '│', '┌', '┐', '┘', '└' }
 
 dressing.setup({
   input = {
@@ -6,10 +10,6 @@ dressing.setup({
   },
   select = {
     backend = { 'telescope' },
-    telescope = {
-      defaults = {
-        borderchars = { '─', '│', '─', '│', '┌', '┐', '┘', '└' }
-      }
-    }
+    telescope = dropdown
   }
 })
