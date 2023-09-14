@@ -57,6 +57,9 @@ require('noice').setup({
       ['cmp.entry.get_documentation'] = true,
     }
   },
+  smart_move = {
+    enabled = false
+  },
   presets = {
     bottom_search = false,
     command_palette = true,
