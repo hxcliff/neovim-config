@@ -178,6 +178,9 @@ lspconfig.rust_analyzer.setup({
   end)(),
   settings = {
     ['rust-analyzer'] = {
+      -- cargo = {
+      --   target = "wasm32-unknown-unknown"
+      -- },
       diagnostics = {
         enable = true,
       },
