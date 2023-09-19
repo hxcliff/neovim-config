@@ -1,6 +1,6 @@
 local lspconfig = require('lspconfig')
-local lspconfig_utils = require("lspconfig.util")
-local methods = vim.lsp.protocol.Methods
+local lspconfig_util = require("lspconfig.util")
+local protocol = require("vim.lsp.protocol")
 
 local on_attach = function(client, bufnr)
   local opt = { noremap = true, silent = true }
@@ -32,7 +32,7 @@ local on_attach = function(client, bufnr)
     })
   end
 
-  if client.supports_method(methods.textDocument_inlayHint) then
+  if client.supports_method(protocol.Methods.textDocument_inlayHint) then
     local inlay_hints_group = vim.api.nvim_create_augroup('ToggleInlayHints', { clear = false })
 
     vim.defer_fn(function()
@@ -68,6 +68,128 @@ lspconfig.jsonls.setup({
 
 lspconfig.tsserver.setup({
   on_attach = on_attach,
+  filetypes = {
+    "javascript",
+    "javascriptreact",
+    "javascript.jsx",
+    "typescript",
+    "typescriptreact",
+    "typescript.tsx",
+  },
+  root_dir = function(fname)
+    local root_dir = lspconfig_util.root_pattern "tsconfig.json" (fname) or
+        lspconfig_util.root_pattern("package.json", "jsconfig.json", ".git")(fname)
+
+    local node_modules_index = root_dir and root_dir:find("node_modules", 1, true)
+    if node_modules_index and node_modules_index > 0 then
+      root_dir = root_dir:sub(1, node_modules_index - 2)
+    end
+
+    return root_dir
+  end,
+  single_file_support = true,
+  capabilities = (function()
+    local capabilities = {
+      textDocumentSync = protocol.TextDocumentSyncKind.Incremental,
+      executeCommandProvider = {
+        commands = {
+          "invoke_additional_rename",
+          "call_api_function"
+        }
+      },
+      renameProvider = {
+        prepareProvider = false
+      },
+      completionProvider = {
+        resolveProvider = true,
+        triggerCharacters = {
+          ".",
+          '"',
+          "'",
+          "`",
+          "/",
+          "@",
+          "<"
+        }
+      },
+      hoverProvider = true,
+      definitionProvider = true,
+      typeDefinitionProvider = true,
+      inlayHintProvider = true,
+      foldingRangeProvider = true,
+      semanticTokensProvider = {
+        documentSelector = nil,
+        legend = {
+          tokenTypes = {
+            "class",
+            "enum",
+            "interface",
+            "namespace",
+            "typeParameter",
+            "type",
+            "parameter",
+            "variable",
+            "enumMember",
+            "property",
+            "function",
+            "member"
+          },
+          tokenModifiers = {
+            "declaration",
+            "static",
+            "async",
+            "readonly",
+            "defaultLibrary",
+            "local"
+          }
+        },
+        full = true
+      },
+      declarationProvider = false,
+      implementationProvider = true,
+      referencesProvider = true,
+      documentSymbolProvider = true,
+      documentHighlightProvider = true,
+      signatureHelpProvider = {
+        triggerCharacters = { "(", ",", "<" },
+        retriggerCharacters = { ")" }
+      },
+      codeActionProvider = {
+        codeActionKinds = {
+          "",
+          "quickfix",
+          "refactor",
+          "refactor.extract",
+          "refactor.inline",
+          "refactor.rewrite",
+          "source",
+          "source.organizeImports"
+        },
+        resolveProvider = true
+      },
+      workspace = {
+        fileOperations = {
+          willRename = {
+            filters = {
+              {
+                scheme = "file",
+                pattern = { glob = "**/*.{ts,js,jsx,tsx,mjs,mts,cjs,cts}", matches = "file" }
+              },
+              {
+                scheme = "file",
+                pattern = { glob = "**/*", matches = "folder" }
+              }
+            }
+          }
+        }
+      },
+      documentFormattingProvider = true,
+      documentRangeFormattingProvider = true,
+      callHierarchyProvider = true,
+      workspaceSymbolProvider = true
+    }
+    return capabilities
+  end)()
 })
 
 lspconfig.yamlls.setup({
@@ -120,11 +242,11 @@ lspconfig.dartls.setup({
 
 local function get_rust_root_dir(filename)
   local fname = filename or vim.api.nvim_buf_get_name(0)
-  local cargo_crate_dir = lspconfig_utils.root_pattern("Cargo.toml")(fname)
+  local cargo_crate_dir = lspconfig_util.root_pattern("Cargo.toml")(fname)
   local cmd = { "cargo", "metadata", "--no-deps", "--format-version", "1" }
   if cargo_crate_dir ~= nil then
     cmd[#cmd + 1] = "--manifest-path"
-    cmd[#cmd + 1] = lspconfig_utils.path.join(cargo_crate_dir, "Cargo.toml")
+    cmd[#cmd + 1] = lspconfig_util.path.join(cargo_crate_dir, "Cargo.toml")
   end
   local cargo_metadata = ""
   local cm = vim.fn.jobstart(cmd, {
@@ -144,8 +266,8 @@ local function get_rust_root_dir(filename)
   end
   return cargo_workspace_dir
       or cargo_crate_dir
-      or lspconfig_utils.root_pattern("rust-project.json")(fname)
-      or lspconfig_utils.find_git_ancestor(fname)
+      or lspconfig_util.root_pattern("rust-project.json")(fname)
+      or lspconfig_util.find_git_ancestor(fname)
 end
 
 lspconfig.rust_analyzer.setup({
@@ -191,14 +313,14 @@ lspconfig.rust_analyzer.setup({
   }
 })
 
-vim.api.nvim_create_autocmd("BufWritePost", {
-  pattern = "*/Cargo.toml",
+vim.api.nvim_create_autocmd('BufWritePost', {
+  pattern = '*/Cargo.toml',
   callback = function()
     local clients = vim.lsp.get_active_clients()
 
     for _, client in ipairs(clients) do
-      if client.name == "rust_analyzer" then
-        client.request("rust-analyzer/reloadWorkspace", nil, function(err)
+      if client.name == 'rust_analyzer' then
+        client.request('rust-analyzer/reloadWorkspace', nil, function(err)
           if err then
             error(tostring(err))
           end
@@ -206,5 +328,5 @@ vim.api.nvim_create_autocmd("BufWritePost", {
       end
     end
   end,
-  group = vim.api.nvim_create_augroup("RustReload", { clear = true }),
+  group = vim.api.nvim_create_augroup('RustReload', { clear = true }),
 })
