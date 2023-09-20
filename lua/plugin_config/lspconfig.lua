@@ -228,7 +228,7 @@ lspconfig.dartls.setup({
     },
   },
   capabilities = (function()
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    local capabilities = protocol.make_client_capabilities()
     capabilities.workspace.configuration = true
     capabilities.workspace.workspaceEdit.documentChanges = true
     capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -274,7 +274,7 @@ lspconfig.rust_analyzer.setup({
   on_attach = on_attach,
   root_dir = get_rust_root_dir,
   capabilities = (function()
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    local capabilities = protocol.make_client_capabilities()
     capabilities.textDocument.completion.completionItem.snippetSupport = true
     capabilities.experimental = {
       hoverActions = true,
