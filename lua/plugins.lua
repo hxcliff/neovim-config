@@ -105,5 +105,6 @@ require('lazy').setup({
     'folke/noice.nvim',
     event = 'VeryLazy'
   },
-  'stevearc/dressing.nvim'
+  'stevearc/dressing.nvim',
+  'fgheng/winbar.nvim'
 })
