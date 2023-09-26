@@ -106,5 +106,12 @@ require('lazy').setup({
     event = 'VeryLazy'
   },
   'stevearc/dressing.nvim',
-  'fgheng/winbar.nvim'
+  {
+    'utilyre/barbecue.nvim',
+    name = 'barbecue',
+    version = '*',
+    dependencies = {
+      'SmiteshP/nvim-navic'
+    }
+  }
 })
