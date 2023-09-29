@@ -1,3 +1,9 @@
+if vim.g.neovide then
+  vim.o.guifont = "JetBrains Mono:h12"
+  vim.g.neovide_cursor_vfx_mode = "pixiedust"
+  vim.g.neovide_transparency = 0.8
+end
+
 vim.o.background = 'dark'
 
 -- utf8
