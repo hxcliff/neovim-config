@@ -70,7 +70,10 @@ require('lazy').setup({
       require('fidget').setup({})
     end
   },
-  'lukas-reineke/indent-blankline.nvim',
+  {
+    'lukas-reineke/indent-blankline.nvim',
+    main = 'ibl'
+  },
   {
     'akinsho/bufferline.nvim',
     version = '*'
@@ -113,5 +116,6 @@ require('lazy').setup({
     dependencies = {
       'SmiteshP/nvim-navic'
     }
-  }
+  },
+  'stevearc/conform.nvim'
 })

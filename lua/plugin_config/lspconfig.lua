@@ -16,7 +16,9 @@ local on_attach = function(client, bufnr)
   mapbuf('n', 'go', '<cmd>lua vim.diagnostic.open_float()<CR>', opt)
   mapbuf('n', 'gk', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opt)
   mapbuf('n', 'gj', '<cmd>lua vim.diagnostic.goto_next()<CR>', opt)
-  mapbuf('n', '<leader>f', '<cmd>lua vim.lsp.buf.format({ async = false })<CR>', { noremap = true })
+
+  local cmd = '<cmd>lua require("conform").format({ async = true, lsp_fallback = true })<CR>'
+  mapbuf('n', '<leader>f', cmd, { noremap = true })
 
   if client.server_capabilities.documentHighlightProvider then
     vim.api.nvim_create_augroup('DocumentHighlight', { clear = false })

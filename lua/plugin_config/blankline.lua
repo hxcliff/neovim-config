@@ -5,7 +5,7 @@ vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
 vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
 vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
 
-local indent_blankline = require('indent_blankline')
+local indent_blankline = require('ibl')
 
 local list = {
   'IndentBlanklineIndent1',
@@ -17,9 +17,7 @@ local list = {
 }
 
 indent_blankline.setup({
-  use_treesitter = true,
-  use_treesitter_scope = true,
-  show_current_context = true,
-  show_current_context_start = true,
-  -- char_highlight_list = list
+  scope = {
+    enabled = true
+  }
 })
