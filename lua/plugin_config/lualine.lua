@@ -30,6 +30,7 @@ local config = {
     section_separators = '',
     theme = 'tokyonight'
   },
+  extensions = { 'neo-tree' },
   sections = {
     lualine_a = {},
     lualine_b = {},

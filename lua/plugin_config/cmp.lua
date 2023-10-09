@@ -1,9 +1,12 @@
 local lspkind = require('lspkind')
 local luasnip = require("luasnip")
 local cmp = require('cmp')
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+local handlers_autopairs = require('nvim-autopairs.completion.handlers')
+
 require('luasnip.loaders.from_vscode').lazy_load()
 
-cmp.setup {
+cmp.setup({
   completion = {
     completeopt = 'menu,menuone,noinsert',
   },
@@ -57,7 +60,8 @@ cmp.setup {
       end
     })
   }
-}
+})
+
 cmp.setup.cmdline({ '/', '?' }, {
   completion = { autocomplete = false, completeopt = "menu,menuone,noinsert,preview" },
   sources = {
@@ -78,3 +82,20 @@ cmp.setup.cmdline(':', {
     { name = 'cmdline' }
   })
 })
+
+cmp.event:on(
+  'confirm_done',
+  cmp_autopairs.on_confirm_done({
+    filetypes = {
+      ['*'] = {
+        ['('] = {
+          kind = {
+            cmp.lsp.CompletionItemKind.Function,
+            cmp.lsp.CompletionItemKind.Method,
+          },
+          handler = handlers_autopairs['*']
+        }
+      }
+    }
+  })
+)
