@@ -202,25 +202,24 @@ lspconfig.clangd.setup({
   on_attach = on_attach,
 })
 
-local function get_dart_root_dir(_)
-  local ROOT_PATTERNS = { ".git", "pubspec.yaml" }
-
-  local client = vim.lsp.get_active_clients({ name = 'dartls', bufnr = bufnr })[1]
-  local root_dir = client and client.config.root_dir or nil
-  if root_dir then return root_dir end
-
-  local buf = vim.api.nvim_get_current_buf()
-  local buf_path = vim.api.nvim_buf_get_name(buf)
-
-  return root_dir or vim.fs.dirname(vim.fs.find(ROOT_PATTERNS, {
-    path = buf_path,
-    upward = true,
-  })[1])
-end
 
 lspconfig.dartls.setup({
   on_attach = on_attach,
-  root_dir = get_dart_root_dir,
+  root_dir = function(_)
+    local ROOT_PATTERNS = { ".git", "pubspec.yaml" }
+
+    local client = vim.lsp.get_active_clients({ name = 'dartls', bufnr = bufnr })[1]
+    local root_dir = client and client.config.root_dir or nil
+    if root_dir then return root_dir end
+
+    local buf = vim.api.nvim_get_current_buf()
+    local buf_path = vim.api.nvim_buf_get_name(buf)
+
+    return root_dir or vim.fs.dirname(vim.fs.find(ROOT_PATTERNS, {
+      path = buf_path,
+      upward = true,
+    })[1])
+  end,
   settings = {
     dart = {
       completeFunctionCalls = true,
@@ -242,39 +241,37 @@ lspconfig.dartls.setup({
   end)()
 })
 
-local function get_rust_root_dir(filename)
-  local fname = filename or vim.api.nvim_buf_get_name(0)
-  local cargo_crate_dir = lspconfig_util.root_pattern("Cargo.toml")(fname)
-  local cmd = { "cargo", "metadata", "--no-deps", "--format-version", "1" }
-  if cargo_crate_dir ~= nil then
-    cmd[#cmd + 1] = "--manifest-path"
-    cmd[#cmd + 1] = lspconfig_util.path.join(cargo_crate_dir, "Cargo.toml")
-  end
-  local cargo_metadata = ""
-  local cm = vim.fn.jobstart(cmd, {
-    on_stdout = function(_, d, _)
-      cargo_metadata = table.concat(d, "\n")
-    end,
-    stdout_buffered = true,
-  })
-  if cm > 0 then
-    cm = vim.fn.jobwait({ cm })[1]
-  else
-    cm = -1
-  end
-  local cargo_workspace_dir = nil
-  if cm == 0 then
-    cargo_workspace_dir = vim.fn.json_decode(cargo_metadata)["workspace_root"]
-  end
-  return cargo_workspace_dir
-      or cargo_crate_dir
-      or lspconfig_util.root_pattern("rust-project.json")(fname)
-      or lspconfig_util.find_git_ancestor(fname)
-end
-
 lspconfig.rust_analyzer.setup({
   on_attach = on_attach,
-  root_dir = get_rust_root_dir,
+  root_dir = function(filename)
+    local fname = filename or vim.api.nvim_buf_get_name(0)
+    local cargo_crate_dir = lspconfig_util.root_pattern("Cargo.toml")(fname)
+    local cmd = { "cargo", "metadata", "--no-deps", "--format-version", "1" }
+    if cargo_crate_dir ~= nil then
+      cmd[#cmd + 1] = "--manifest-path"
+      cmd[#cmd + 1] = lspconfig_util.path.join(cargo_crate_dir, "Cargo.toml")
+    end
+    local cargo_metadata = ""
+    local cm = vim.fn.jobstart(cmd, {
+      on_stdout = function(_, d, _)
+        cargo_metadata = table.concat(d, "\n")
+      end,
+      stdout_buffered = true,
+    })
+    if cm > 0 then
+      cm = vim.fn.jobwait({ cm })[1]
+    else
+      cm = -1
+    end
+    local cargo_workspace_dir = nil
+    if cm == 0 then
+      cargo_workspace_dir = vim.fn.json_decode(cargo_metadata)["workspace_root"]
+    end
+    return cargo_workspace_dir
+        or cargo_crate_dir
+        or lspconfig_util.root_pattern("rust-project.json")(fname)
+        or lspconfig_util.find_git_ancestor(fname)
+  end,
   capabilities = (function()
     local capabilities = protocol.make_client_capabilities()
     capabilities.textDocument.completion.completionItem.snippetSupport = true
