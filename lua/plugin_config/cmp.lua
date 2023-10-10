@@ -1,10 +1,7 @@
 local lspkind = require('lspkind')
 local luasnip = require("luasnip")
 local cmp = require('cmp')
-local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-local handlers_autopairs = require('nvim-autopairs.completion.handlers')
-
-require('luasnip.loaders.from_vscode').lazy_load()
+local luasnip_vscode = require('luasnip.loaders.from_vscode')
 
 cmp.setup({
   completion = {
@@ -83,19 +80,4 @@ cmp.setup.cmdline(':', {
   })
 })
 
-cmp.event:on(
-  'confirm_done',
-  cmp_autopairs.on_confirm_done({
-    filetypes = {
-      ['*'] = {
-        ['('] = {
-          kind = {
-            cmp.lsp.CompletionItemKind.Function,
-            cmp.lsp.CompletionItemKind.Method,
-          },
-          handler = handlers_autopairs['*']
-        }
-      }
-    }
-  })
-)
+luasnip_vscode.lazy_load()
