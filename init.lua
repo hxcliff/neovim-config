@@ -16,8 +16,6 @@ require('keybindings')
 
 require('plugins')
 require('plugin_config/flash')
--- require('plugin_config/notify')
--- require('plugin_config/noice')
 require('plugin_config/barbecue')
 require('plugin_config/dressing')
 require('plugin_config/telescope')

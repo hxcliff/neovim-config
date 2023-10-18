@@ -103,11 +103,6 @@ require('lazy').setup({
       require('gitsigns').setup({})
     end
   },
-  'rcarriga/nvim-notify',
-  {
-    'folke/noice.nvim',
-    event = 'VeryLazy'
-  },
   'stevearc/dressing.nvim',
   {
     'utilyre/barbecue.nvim',
