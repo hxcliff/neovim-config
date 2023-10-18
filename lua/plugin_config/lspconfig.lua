@@ -68,6 +68,10 @@ lspconfig.jsonls.setup({
   on_attach = on_attach,
 })
 
+lspconfig.taplo.setup({
+  on_attach = on_attach,
+})
+
 lspconfig.tsserver.setup({
   on_attach = on_attach,
   filetypes = {
