@@ -6,7 +6,7 @@ local luasnip_vscode = require('luasnip.loaders.from_vscode')
 cmp.setup({
   preselect = cmp.PreselectMode.None,
   completion = {
-    completeopt = 'menu,menuone,noselect',
+    completeopt = 'menu,menuone,noinsert,noselect',
   },
   snippet = {
     expand = function(args) luasnip.lsp_expand(args.body) end
