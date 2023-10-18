@@ -2,7 +2,8 @@ local barbecue = require('barbecue')
 local barbecue_ui = require('barbecue.ui')
 
 barbecue.setup({
-  create_autocmd = false
+  create_autocmd = false,
+  exclude_filetypes = { "netrw", "toggleterm" }
 })
 
 vim.opt.updatetime = 150

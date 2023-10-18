@@ -45,7 +45,7 @@ cmp.setup({
     { name = 'buffer' },
     { name = 'path' }
   }),
-  mapping = require 'keybindings'.cmp(cmp),
+  mapping = require('keybindings').cmp(cmp),
   formatting = {
     format = lspkind.cmp_format({
       mode = 'symbol',
