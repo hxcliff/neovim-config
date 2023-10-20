@@ -61,6 +61,22 @@ end
 
 local workspace_dir = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
 jdtls.start_or_attach({
+  settings = {
+    java = {
+      configuration = {
+        runtimes = {
+          {
+            name = "JavaSE-11",
+            path = "/usr/lib/jvm/java-11-openjdk",
+          },
+          {
+            name = "JavaSE-17",
+            path = "/usr/lib/jvm/java-17-openjdk",
+          },
+        }
+      }
+    }
+  },
   on_attach = on_attach,
   cmd = {
     '/usr/bin/jdtls',
