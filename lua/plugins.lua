@@ -112,5 +112,6 @@ require('lazy').setup({
       'SmiteshP/nvim-navic'
     }
   },
-  'stevearc/conform.nvim'
+  'stevearc/conform.nvim',
+  'mfussenegger/nvim-jdtls'
 })
