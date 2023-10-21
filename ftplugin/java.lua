@@ -59,8 +59,11 @@ local on_attach = function(client, bufnr)
   end
 end
 
-local workspace_dir = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
+local handlers = {}
+handlers['language/status'] = function(_, _) end
+
 jdtls.start_or_attach({
+  handlers = handlers,
   settings = {
     java = {
       configuration = {
@@ -81,7 +84,7 @@ jdtls.start_or_attach({
   cmd = {
     '/usr/bin/jdtls',
     '-data',
-    vim.fn.expand('~/.cache/jdtls-workspace/') .. workspace_dir
+    vim.fn.expand('~/.cache/jdtls-workspace/') .. vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
   },
   root_dir = vim.fs.dirname(vim.fs.find({ 'gradlew', '.git', 'mvnw' }, { upward = true })[1])
 })
