@@ -60,6 +60,10 @@ local on_attach = function(client, bufnr)
   end
 end
 
+lspconfig.lemminx.setup({
+  on_attach = on_attach,
+})
+
 lspconfig.lua_ls.setup({
   on_attach = on_attach,
 })
