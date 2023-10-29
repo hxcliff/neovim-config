@@ -1,3 +1,3 @@
 ```shell
-git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim && sudo pacman -S python-pynvim ripgrep fd lua-language-server vscode-json-languageserver typescript-language-server yaml-language-server --needed
+paru -S ripgrep fd lua-language-server vscode-json-languageserver typescript-language-server yaml-language-server taplo-cli clang openjdk17-src openjdk17-doc jdk17-openjdk openjdk11-src openjdk11-doc jdk11-openjdk openjdk8-src openjdk8-doc jdk8-openjdk maven jdtls flutter lemminx --needed && git config --global --add safe.directory /opt/flutter
 ```

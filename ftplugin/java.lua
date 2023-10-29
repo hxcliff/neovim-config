@@ -69,6 +69,10 @@ jdtls.start_or_attach({
       configuration = {
         runtimes = {
           {
+            name = "JavaSE-8",
+            path = "/usr/lib/jvm/java-8-openjdk",
+          },
+          {
             name = "JavaSE-11",
             path = "/usr/lib/jvm/java-11-openjdk",
           },
@@ -82,7 +86,7 @@ jdtls.start_or_attach({
   },
   on_attach = on_attach,
   cmd = {
-    '/usr/bin/jdtls',
+    'jdtls',
     '-data',
     vim.fn.expand('~/.cache/jdtls-workspace/') .. vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
   },
