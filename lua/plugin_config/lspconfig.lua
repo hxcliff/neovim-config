@@ -76,6 +76,10 @@ lspconfig.taplo.setup({
   on_attach = on_attach,
 })
 
+lspconfig.pylsp.setup({
+  on_attach = on_attach,
+})
+
 lspconfig.tsserver.setup({
   on_attach = on_attach,
   filetypes = {
