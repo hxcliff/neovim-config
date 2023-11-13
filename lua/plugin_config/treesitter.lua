@@ -1,5 +1,14 @@
 local treesitter = require('nvim-treesitter.configs')
 
+local parser = require("nvim-treesitter.parsers").get_parser_configs()
+parser.dart = {
+  install_info = {
+    url = "https://github.com/UserNobody14/tree-sitter-dart",
+    files = { "src/parser.c", "src/scanner.c" },
+    revision = "8aa8ab977647da2d4dcfb8c4726341bee26fbce4"
+  }
+}
+
 treesitter.setup({
   ensure_installed = {
     'python', 'lua', 'java', 'rust', 'json', 'html', 'css', 'javascript', 'dart', 'yaml', 'toml', 'c_sharp', 'c', 'cpp',
