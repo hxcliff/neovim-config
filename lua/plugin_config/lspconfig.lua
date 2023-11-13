@@ -60,6 +60,24 @@ local on_attach = function(client, bufnr)
   end
 end
 
+lspconfig.cssls.setup({
+  on_attach = on_attach,
+  capabilities = (function()
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities.textDocument.completion.completionItem.snippetSupport = true
+    return capabilities
+  end)()
+})
+
+lspconfig.html.setup({
+  on_attach = on_attach,
+  capabilities = (function()
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities.textDocument.completion.completionItem.snippetSupport = true
+    return capabilities
+  end)()
+})
+
 lspconfig.lemminx.setup({
   on_attach = on_attach,
 })
