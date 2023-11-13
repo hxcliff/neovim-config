@@ -98,6 +98,23 @@ lspconfig.pylsp.setup({
   on_attach = on_attach,
 })
 
+lspconfig.yamlls.setup({
+  on_attach = on_attach,
+})
+
+lspconfig.clangd.setup({
+  on_attach = on_attach,
+})
+
+lspconfig.cssls.setup {
+  on_attach = on_attach,
+  capabilities = (function()
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities.textDocument.completion.completionItem.snippetSupport = true
+    return capabilities
+  end)(),
+}
+
 lspconfig.tsserver.setup({
   on_attach = on_attach,
   filetypes = {
@@ -223,15 +240,6 @@ lspconfig.tsserver.setup({
     return capabilities
   end)()
 })
-
-lspconfig.yamlls.setup({
-  on_attach = on_attach,
-})
-
-lspconfig.clangd.setup({
-  on_attach = on_attach,
-})
-
 
 lspconfig.dartls.setup({
   on_attach = on_attach,
