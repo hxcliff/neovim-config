@@ -9,7 +9,6 @@ require('lazy').setup({
   },
   'nvim-lua/plenary.nvim',
   'nvim-tree/nvim-web-devicons',
-  'MunifTanjim/nui.nvim',
   'nvim-lualine/lualine.nvim',
   {
     'nvim-treesitter/nvim-treesitter',
@@ -93,10 +92,10 @@ require('lazy').setup({
       require('crates').setup({})
     end
   },
-  {
-    'nvim-neo-tree/neo-tree.nvim',
-    branch = 'v3.x'
-  },
+  -- {
+  --   'nvim-neo-tree/neo-tree.nvim',
+  --   branch = 'v3.x'
+  -- },
   {
     'lewis6991/gitsigns.nvim',
     config = function()
@@ -104,14 +103,14 @@ require('lazy').setup({
     end
   },
   'stevearc/dressing.nvim',
-  {
-    'utilyre/barbecue.nvim',
-    name = 'barbecue',
-    version = '*',
-    dependencies = {
-      'SmiteshP/nvim-navic'
-    }
-  },
+  -- {
+  --   'utilyre/barbecue.nvim',
+  --   name = 'barbecue',
+  --   version = '*',
+  --   dependencies = {
+  --     'SmiteshP/nvim-navic'
+  --   }
+  -- },
   'stevearc/conform.nvim',
   'mfussenegger/nvim-jdtls'
 })
