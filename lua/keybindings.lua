@@ -23,11 +23,11 @@ map('n', ',w', ':Telescope live_grep<CR>', opt)
 map('n', ',b', ':Telescope buffers<CR>', opt)
 map('n', ',t', ':ToggleTerm<CR>', opt)
 
-map("n", "<A-h>", ":BufferLineCyclePrev<CR>", opt)
-map("n", "<A-l>", ":BufferLineCycleNext<CR>", opt)
-map("n", "<A-w>", ":lua require('bufdelete').bufdelete(0, true)<CR>", opt)
+map('n', '<A-h>', ':BufferLineCyclePrev<CR>', opt)
+map('n', '<A-l>', ':BufferLineCycleNext<CR>', opt)
+map('n', '<A-w>', ':lua require(\'bufdelete\').bufdelete(0, true)<CR>', opt)
 
-map("n", "gt", ":lua require('treesitter-context').go_to_context()<CR>", opt)
+map('n', 'gt', ':lua require(\'treesitter-context\').go_to_context()<CR>', opt)
 
 local pluginKeys = {}
 

@@ -1,7 +1,7 @@
 require('lazy').setup({
   {
-    "catppuccin/nvim",
-    name = "catppuccin",
+    'catppuccin/nvim',
+    name = 'catppuccin',
     priority = 1000,
     config = function()
       vim.cmd([[colorscheme catppuccin-mocha]])
@@ -9,6 +9,7 @@ require('lazy').setup({
   },
   'nvim-lua/plenary.nvim',
   'nvim-tree/nvim-web-devicons',
+  'MunifTanjim/nui.nvim',
   'nvim-lualine/lualine.nvim',
   {
     'nvim-treesitter/nvim-treesitter',
@@ -92,10 +93,10 @@ require('lazy').setup({
       require('crates').setup({})
     end
   },
-  -- {
-  --   'nvim-neo-tree/neo-tree.nvim',
-  --   branch = 'v3.x'
-  -- },
+  {
+    'nvim-neo-tree/neo-tree.nvim',
+    branch = 'v3.x'
+  },
   {
     'lewis6991/gitsigns.nvim',
     config = function()

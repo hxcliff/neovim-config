@@ -1,4 +1,4 @@
-local protocol = require("vim.lsp.protocol")
+local protocol = require('vim.lsp.protocol')
 local jdtls = require('jdtls')
 
 local on_attach = function(client, bufnr)
@@ -16,7 +16,7 @@ local on_attach = function(client, bufnr)
   mapbuf('n', 'gk', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opt)
   mapbuf('n', 'gj', '<cmd>lua vim.diagnostic.goto_next()<CR>', opt)
 
-  local cmd = '<cmd>lua require("conform").format({ async = true, lsp_fallback = true })<CR>'
+  local cmd = '<cmd>lua require(\'conform\').format({ async = true, lsp_fallback = true })<CR>'
   mapbuf('n', '<leader>f', cmd, { noremap = true })
 
   if client.server_capabilities.documentHighlightProvider then
@@ -32,31 +32,6 @@ local on_attach = function(client, bufnr)
       callback = vim.lsp.buf.clear_references,
     })
   end
-
-  if client.supports_method(protocol.Methods.textDocument_inlayHint) then
-    local inlay_hints_group = vim.api.nvim_create_augroup('ToggleInlayHints', { clear = false })
-
-    vim.defer_fn(function()
-      local mode = vim.api.nvim_get_mode().mode
-      vim.lsp.inlay_hint(bufnr, mode == 'n' or mode == 'v')
-    end, 250)
-
-    vim.api.nvim_create_autocmd('InsertEnter', {
-      group = inlay_hints_group,
-      buffer = bufnr,
-      callback = function()
-        vim.lsp.inlay_hint(bufnr, false)
-      end
-    })
-
-    vim.api.nvim_create_autocmd('InsertLeave', {
-      group = inlay_hints_group,
-      buffer = bufnr,
-      callback = function()
-        vim.lsp.inlay_hint(bufnr, true)
-      end
-    })
-  end
 end
 
 local handlers = {}
@@ -69,16 +44,16 @@ jdtls.start_or_attach({
       configuration = {
         runtimes = {
           {
-            name = "JavaSE-8",
-            path = "/usr/lib/jvm/java-8-openjdk",
+            name = 'JavaSE-8',
+            path = '/usr/lib/jvm/java-8-openjdk',
           },
           {
-            name = "JavaSE-11",
-            path = "/usr/lib/jvm/java-11-openjdk",
+            name = 'JavaSE-11',
+            path = '/usr/lib/jvm/java-11-openjdk',
           },
           {
-            name = "JavaSE-17",
-            path = "/usr/lib/jvm/java-17-openjdk",
+            name = 'JavaSE-17',
+            path = '/usr/lib/jvm/java-17-openjdk',
           },
         }
       }

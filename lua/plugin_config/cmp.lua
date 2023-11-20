@@ -1,5 +1,5 @@
 local lspkind = require('lspkind')
-local luasnip = require("luasnip")
+local luasnip = require('luasnip')
 local cmp = require('cmp')
 local luasnip_vscode = require('luasnip.loaders.from_vscode')
 
@@ -32,7 +32,7 @@ cmp.setup({
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
-    { name = "crates" }
+    { name = 'crates' }
   }, {
     { name = 'buffer' },
     { name = 'path' }
@@ -52,7 +52,7 @@ cmp.setup({
 })
 
 cmp.setup.cmdline({ '/', '?' }, {
-  completion = { autocomplete = false, completeopt = "menu,menuone,noinsert,preview" },
+  completion = { autocomplete = false, completeopt = 'menu,menuone,noinsert,preview' },
   sources = {
     {
       name = 'buffer',
@@ -64,7 +64,7 @@ cmp.setup.cmdline({ '/', '?' }, {
 })
 
 cmp.setup.cmdline(':', {
-  completion = { autocomplete = false, completeopt = "menu,menuone,noinsert,preview" },
+  completion = { autocomplete = false, completeopt = 'menu,menuone,noinsert,preview' },
   sources = cmp.config.sources({
     { name = 'path' }
   }, {

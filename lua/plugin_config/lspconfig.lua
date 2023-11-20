@@ -1,6 +1,6 @@
 local lspconfig = require('lspconfig')
-local lspconfig_util = require("lspconfig.util")
-local protocol = require("vim.lsp.protocol")
+local lspconfig_util = require('lspconfig.util')
+local protocol = require('vim.lsp.protocol')
 
 local on_attach = function(client, bufnr)
   local opt = { noremap = true, silent = true }
@@ -17,7 +17,7 @@ local on_attach = function(client, bufnr)
   mapbuf('n', 'gk', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opt)
   mapbuf('n', 'gj', '<cmd>lua vim.diagnostic.goto_next()<CR>', opt)
 
-  local cmd = '<cmd>lua require("conform").format({ async = true, lsp_fallback = true })<CR>'
+  local cmd = '<cmd>lua require(\'conform\').format({ async = true, lsp_fallback = true })<CR>'
   mapbuf('n', '<leader>f', cmd, { noremap = true })
 
   if client.server_capabilities.documentHighlightProvider then
@@ -82,10 +82,10 @@ lspconfig.cssls.setup {
 }
 
 local function typescript_root_dir(fname)
-  local root_dir = lspconfig_util.root_pattern "tsconfig.json" (fname) or
-      lspconfig_util.root_pattern("package.json", "jsconfig.json", ".git")(fname)
+  local root_dir = lspconfig_util.root_pattern 'tsconfig.json' (fname) or
+      lspconfig_util.root_pattern('package.json', 'jsconfig.json', '.git')(fname)
 
-  local node_modules_index = root_dir and root_dir:find("node_modules", 1, true)
+  local node_modules_index = root_dir and root_dir:find('node_modules', 1, true)
   if node_modules_index and node_modules_index > 0 then
     root_dir = root_dir:sub(1, node_modules_index - 2)
   end
@@ -99,10 +99,10 @@ local function typescript_capabilities()
     textDocumentSync = protocol.TextDocumentSyncKind.Incremental,
     executeCommandProvider = {
       commands = {
-        "invoke_additional_rename",
-        "call_api_function",
-        "request_references",
-        "request_implementations"
+        'invoke_additional_rename',
+        'call_api_function',
+        'request_references',
+        'request_implementations'
       },
     },
     renameProvider = {
@@ -111,13 +111,13 @@ local function typescript_capabilities()
     completionProvider = {
       resolveProvider = true,
       triggerCharacters = {
-        ".",
+        '.',
         '"',
-        "'",
-        "`",
-        "/",
-        "@",
-        "<",
+        '\'',
+        '`',
+        '/',
+        '@',
+        '<',
       },
     },
     hoverProvider = true,
@@ -129,26 +129,26 @@ local function typescript_capabilities()
       documentSelector = nil,
       legend = {
         tokenTypes = {
-          "class",
-          "enum",
-          "interface",
-          "namespace",
-          "typeParameter",
-          "type",
-          "parameter",
-          "variable",
-          "enumMember",
-          "property",
-          "function",
-          "member",
+          'class',
+          'enum',
+          'interface',
+          'namespace',
+          'typeParameter',
+          'type',
+          'parameter',
+          'variable',
+          'enumMember',
+          'property',
+          'function',
+          'member',
         },
         tokenModifiers = {
-          "declaration",
-          "static",
-          "async",
-          "readonly",
-          "defaultLibrary",
-          "local",
+          'declaration',
+          'static',
+          'async',
+          'readonly',
+          'defaultLibrary',
+          'local',
         },
       },
       full = true,
@@ -159,19 +159,19 @@ local function typescript_capabilities()
     documentSymbolProvider = true,
     documentHighlightProvider = true,
     signatureHelpProvider = {
-      triggerCharacters = { "(", ",", "<" },
-      retriggerCharacters = { ")" },
+      triggerCharacters = { '(', ',', '<' },
+      retriggerCharacters = { ')' },
     },
     codeActionProvider = {
       codeActionKinds = {
-        "",
-        "quickfix",
-        "refactor",
-        "refactor.extract",
-        "refactor.inline",
-        "refactor.rewrite",
-        "source",
-        "source.organizeImports"
+        '',
+        'quickfix',
+        'refactor',
+        'refactor.extract',
+        'refactor.inline',
+        'refactor.rewrite',
+        'source',
+        'source.organizeImports'
       },
       resolveProvider = true,
     },
@@ -180,12 +180,12 @@ local function typescript_capabilities()
         willRename = {
           filters = {
             {
-              scheme = "file",
-              pattern = { glob = "**/*.{ts,js,jsx,tsx,mjs,mts,cjs,cts}", matches = "file" },
+              scheme = 'file',
+              pattern = { glob = '**/*.{ts,js,jsx,tsx,mjs,mts,cjs,cts}', matches = 'file' },
             },
             {
-              scheme = "file",
-              pattern = { glob = "**/*", matches = "folder" },
+              scheme = 'file',
+              pattern = { glob = '**/*', matches = 'folder' },
             },
           },
         },
@@ -206,12 +206,12 @@ end
 lspconfig.tsserver.setup({
   on_attach = on_attach,
   filetypes = {
-    "javascript",
-    "javascriptreact",
-    "javascript.jsx",
-    "typescript",
-    "typescriptreact",
-    "typescript.tsx",
+    'javascript',
+    'javascriptreact',
+    'javascript.jsx',
+    'typescript',
+    'typescriptreact',
+    'typescript.tsx'
   },
   root_dir = typescript_root_dir,
   single_file_support = true,
@@ -219,7 +219,7 @@ lspconfig.tsserver.setup({
 })
 
 local function dart_root_dir(_)
-  local ROOT_PATTERNS = { ".git", "pubspec.yaml" }
+  local ROOT_PATTERNS = { '.git', 'pubspec.yaml' }
 
   local client = vim.lsp.get_active_clients({ name = 'dartls', bufnr = bufnr })[1]
   local root_dir = client and client.config.root_dir or nil
@@ -242,7 +242,7 @@ local function dart_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
   capabilities.textDocument.documentColor = { dynamicRegistration = true }
   capabilities.textDocument.completion.completionItem.resolveSupport = {
-    properties = { "documentation", "detail", "additionalTextEdits" },
+    properties = { 'documentation', 'detail', 'additionalTextEdits' },
   }
 
   return capabilities
@@ -264,16 +264,16 @@ lspconfig.dartls.setup({
 
 local function rust_root_dir(filename)
   local fname = filename or vim.api.nvim_buf_get_name(0)
-  local cargo_crate_dir = lspconfig_util.root_pattern("Cargo.toml")(fname)
-  local cmd = { "cargo", "metadata", "--no-deps", "--format-version", "1" }
+  local cargo_crate_dir = lspconfig_util.root_pattern('Cargo.toml')(fname)
+  local cmd = { 'cargo', 'metadata', '--no-deps', '--format-version', '1' }
   if cargo_crate_dir ~= nil then
-    cmd[#cmd + 1] = "--manifest-path"
-    cmd[#cmd + 1] = lspconfig_util.path.join(cargo_crate_dir, "Cargo.toml")
+    cmd[#cmd + 1] = '--manifest-path'
+    cmd[#cmd + 1] = lspconfig_util.path.join(cargo_crate_dir, 'Cargo.toml')
   end
-  local cargo_metadata = ""
+  local cargo_metadata = ''
   local cm = vim.fn.jobstart(cmd, {
     on_stdout = function(_, d, _)
-      cargo_metadata = table.concat(d, "\n")
+      cargo_metadata = table.concat(d, '\n')
     end,
     stdout_buffered = true,
   })
@@ -284,11 +284,11 @@ local function rust_root_dir(filename)
   end
   local cargo_workspace_dir = nil
   if cm == 0 then
-    cargo_workspace_dir = vim.fn.json_decode(cargo_metadata)["workspace_root"]
+    cargo_workspace_dir = vim.fn.json_decode(cargo_metadata)['workspace_root']
   end
   return cargo_workspace_dir
       or cargo_crate_dir
-      or lspconfig_util.root_pattern("rust-project.json")(fname)
+      or lspconfig_util.root_pattern('rust-project.json')(fname)
       or lspconfig_util.find_git_ancestor(fname)
 end
 
@@ -304,15 +304,15 @@ local function rust_capabilities()
     ssr = true
   }
   capabilities.textDocument.completion.completionItem.resolveSupport = {
-    properties = { "documentation", "detail", "additionalTextEdits" },
+    properties = { 'documentation', 'detail', 'additionalTextEdits' },
   }
   capabilities.experimental.commands = {
     commands = {
-      "rust-analyzer.runSingle",
-      "rust-analyzer.debugSingle",
-      "rust-analyzer.showReferences",
-      "rust-analyzer.gotoLocation",
-      "editor.action.triggerParameterHints",
+      'rust-analyzer.runSingle',
+      'rust-analyzer.debugSingle',
+      'rust-analyzer.showReferences',
+      'rust-analyzer.gotoLocation',
+      'editor.action.triggerParameterHints',
     }
   }
   return capabilities
@@ -325,7 +325,7 @@ lspconfig.rust_analyzer.setup({
   settings = {
     ['rust-analyzer'] = {
       -- cargo = {
-      --   target = "wasm32-unknown-unknown"
+      --   target = 'wasm32-unknown-unknown'
       -- },
       diagnostics = {
         enable = true,
@@ -337,7 +337,7 @@ lspconfig.rust_analyzer.setup({
   }
 })
 
-local group = vim.api.nvim_create_augroup("RustToolsAutocmds", { clear = true })
+local group = vim.api.nvim_create_augroup('RustToolsAutocmds', { clear = true })
 
 vim.api.nvim_create_autocmd('BufWritePost', {
   pattern = '*/Cargo.toml',
@@ -357,11 +357,11 @@ vim.api.nvim_create_autocmd('BufWritePost', {
   group = group,
 })
 
-vim.api.nvim_create_autocmd("VimEnter", {
-  pattern = "*.rs",
+vim.api.nvim_create_autocmd('VimEnter', {
+  pattern = '*.rs',
   callback = function()
     local bufnr = vim.api.nvim_get_current_buf()
-    local rust = vim.api.nvim_buf_get_option(bufnr, "ft") == "rust"
+    local rust = vim.api.nvim_buf_get_option(bufnr, 'ft') == 'rust'
 
     if rust and (rust_root_dir() == nil)
     then
@@ -376,9 +376,6 @@ vim.api.nvim_create_autocmd("VimEnter", {
         capabilities = rust_capabilities(),
         settings = {
           ['rust-analyzer'] = {
-            -- cargo = {
-            --   target = "wasm32-unknown-unknown"
-            -- },
             diagnostics = {
               enable = true,
             },
