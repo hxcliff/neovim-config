@@ -12,7 +12,11 @@ require('lazy').setup({
             colored_indent_levels = true,
           },
           neotree = true,
-          treesitter_context = true
+          treesitter_context = true,
+          telescope = {
+            enabled = true,
+            style = 'nvchad'
+          }
         }
       })
 
@@ -47,6 +51,7 @@ require('lazy').setup({
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x'
   },
+  'nvim-telescope/telescope-ui-select.nvim',
   {
     'windwp/nvim-autopairs',
     config = function() require('nvim-autopairs').setup({}) end
@@ -121,7 +126,6 @@ require('lazy').setup({
       require('gitsigns').setup({})
     end
   },
-  'stevearc/dressing.nvim',
   {
     'utilyre/barbecue.nvim',
     name = 'barbecue',

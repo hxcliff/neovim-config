@@ -13,3 +13,5 @@ telescope.setup({
     borderchars = { '─', '│', '─', '│', '┌', '┐', '┘', '└' }
   }
 })
+
+telescope.load_extension('ui-select')

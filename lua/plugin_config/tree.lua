@@ -6,7 +6,7 @@ neo_tree.setup({
   use_default_mappings = false,
   window = {
     position = 'left',
-    width = 35,
+    width = 40,
     mappings = {
       ["<space>"] = {
         "toggle_node",
