@@ -4,6 +4,18 @@ require('lazy').setup({
     name = 'catppuccin',
     priority = 1000,
     config = function()
+      require("catppuccin").setup({
+        integrations = {
+          fidget = true,
+          indent_blankline = {
+            enabled = true,
+            colored_indent_levels = true,
+          },
+          neotree = true,
+          treesitter_context = true
+        }
+      })
+
       vim.cmd([[colorscheme catppuccin-mocha]])
     end
   },
@@ -67,7 +79,13 @@ require('lazy').setup({
     'j-hui/fidget.nvim',
     tag = 'legacy',
     config = function()
-      require('fidget').setup({})
+      require('fidget').setup({
+        notification = {
+          window = {
+            winblend = 0
+          }
+        }
+      })
     end
   },
   {
@@ -104,14 +122,31 @@ require('lazy').setup({
     end
   },
   'stevearc/dressing.nvim',
-  -- {
-  --   'utilyre/barbecue.nvim',
-  --   name = 'barbecue',
-  --   version = '*',
-  --   dependencies = {
-  --     'SmiteshP/nvim-navic'
-  --   }
-  -- },
+  {
+    'utilyre/barbecue.nvim',
+    name = 'barbecue',
+    version = '*',
+    dependencies = {
+      'SmiteshP/nvim-navic'
+    }
+  },
   'stevearc/conform.nvim',
-  'mfussenegger/nvim-jdtls'
+  'mfussenegger/nvim-jdtls',
+  {
+    'zbirenbaum/copilot.lua',
+    event = 'InsertEnter',
+    config = function()
+      require('copilot').setup({
+        suggestion = { enabled = false },
+        panel = { enabled = false },
+      })
+    end,
+  },
+  {
+    'zbirenbaum/copilot-cmp',
+    config = function()
+      require('copilot_cmp').setup()
+    end
+  }
+
 })

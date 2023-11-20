@@ -16,7 +16,7 @@ require('keybindings')
 
 require('plugins')
 require('plugin_config/flash')
--- require('plugin_config/barbecue')
+require('plugin_config/barbecue')
 require('plugin_config/toggleterm')
 require('plugin_config/dressing')
 require('plugin_config/telescope')
