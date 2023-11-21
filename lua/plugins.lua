@@ -2,31 +2,12 @@ require('lazy').setup({
   {
     'catppuccin/nvim',
     name = 'catppuccin',
-    priority = 1000,
-    config = function()
-      require("catppuccin").setup({
-        integrations = {
-          fidget = true,
-          indent_blankline = {
-            enabled = true,
-            colored_indent_levels = true,
-          },
-          neotree = true,
-          treesitter_context = true,
-          telescope = {
-            enabled = true,
-            style = 'nvchad'
-          }
-        }
-      })
-
-      vim.cmd([[colorscheme catppuccin-mocha]])
-    end
+    priority = 1000
   },
-  'nvim-lua/plenary.nvim',
-  'nvim-tree/nvim-web-devicons',
-  'MunifTanjim/nui.nvim',
-  'nvim-lualine/lualine.nvim',
+  {
+    'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' }
+  },
   {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate'
@@ -47,14 +28,18 @@ require('lazy').setup({
       vim.api.nvim_set_keymap('n', 'k', '<Plug>(faster_move_k)', { noremap = false, silent = true })
     end
   },
+
   {
     'nvim-telescope/telescope.nvim',
-    branch = '0.1.x'
+    branch = '0.1.x',
+    dependencies = { 'nvim-lua/plenary.nvim' }
   },
   'nvim-telescope/telescope-ui-select.nvim',
   {
     'windwp/nvim-autopairs',
-    config = function() require('nvim-autopairs').setup({}) end
+    config = function()
+      require('nvim-autopairs').setup({})
+    end
   },
   'neovim/nvim-lspconfig',
   'hrsh7th/nvim-cmp',
@@ -68,30 +53,11 @@ require('lazy').setup({
   'onsails/lspkind-nvim',
   {
     'zbirenbaum/neodim',
-    branch = 'v2',
-    config = function()
-      require('neodim').setup({
-        alpha = 0.5,
-        hide = {
-          virtual_text = true,
-          signs = false,
-          underline = false,
-        }
-      })
-    end
+    event = 'LspAttach',
+    branch = 'v2'
   },
   {
-    'j-hui/fidget.nvim',
-    tag = 'legacy',
-    config = function()
-      require('fidget').setup({
-        notification = {
-          window = {
-            winblend = 0
-          }
-        }
-      })
-    end
+    'j-hui/fidget.nvim'
   },
   {
     'lukas-reineke/indent-blankline.nvim',
@@ -99,7 +65,8 @@ require('lazy').setup({
   },
   {
     'akinsho/bufferline.nvim',
-    version = '*'
+    version = '*',
+    dependencies = 'nvim-tree/nvim-web-devicons'
   },
   'famiu/bufdelete.nvim',
   {
@@ -111,14 +78,20 @@ require('lazy').setup({
   },
   {
     'saecki/crates.nvim',
-    tag = 'v0.3.0',
+    tag = 'v0.4.0',
+    dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
       require('crates').setup({})
     end
   },
   {
     'nvim-neo-tree/neo-tree.nvim',
-    branch = 'v3.x'
+    branch = 'v3.x',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-tree/nvim-web-devicons',
+      'MunifTanjim/nui.nvim'
+    }
   },
   {
     'lewis6991/gitsigns.nvim',
@@ -152,5 +125,4 @@ require('lazy').setup({
       require('copilot_cmp').setup()
     end
   }
-
 })
