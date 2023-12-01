@@ -124,5 +124,18 @@ require('lazy').setup({
     config = function()
       require('copilot_cmp').setup()
     end
+  },
+  {
+    'DNLHC/glance.nvim',
+    cmd = 'Glance',
+    config = function()
+      require('glance').setup({
+        height = 20,
+        detached = false,
+        preview_win_opts = {
+          number = false
+        }
+      })
+    end
   }
 })
