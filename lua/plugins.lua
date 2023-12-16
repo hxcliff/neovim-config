@@ -6,7 +6,7 @@ require('lazy').setup({
   },
   {
     'nvim-lualine/lualine.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' }
+    dependencies = 'nvim-tree/nvim-web-devicons'
   },
   {
     'nvim-treesitter/nvim-treesitter',
@@ -28,11 +28,10 @@ require('lazy').setup({
       vim.api.nvim_set_keymap('n', 'k', '<Plug>(faster_move_k)', { noremap = false, silent = true })
     end
   },
-
   {
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
-    dependencies = { 'nvim-lua/plenary.nvim' }
+    dependencies = 'nvim-lua/plenary.nvim'
   },
   'nvim-telescope/telescope-ui-select.nvim',
   {
@@ -79,7 +78,7 @@ require('lazy').setup({
   {
     'saecki/crates.nvim',
     tag = 'v0.4.0',
-    dependencies = { 'nvim-lua/plenary.nvim' },
+    dependencies = 'nvim-lua/plenary.nvim',
     config = function()
       require('crates').setup({})
     end
@@ -103,9 +102,7 @@ require('lazy').setup({
     'utilyre/barbecue.nvim',
     name = 'barbecue',
     version = '*',
-    dependencies = {
-      'SmiteshP/nvim-navic'
-    }
+    dependencies = 'SmiteshP/nvim-navic'
   },
   'stevearc/conform.nvim',
   'mfussenegger/nvim-jdtls',
@@ -124,6 +121,6 @@ require('lazy').setup({
   },
   {
     'kevinhwang91/nvim-ufo',
-    dependencies = { 'kevinhwang91/promise-async' }
+    dependencies = 'kevinhwang91/promise-async'
   }
 })
