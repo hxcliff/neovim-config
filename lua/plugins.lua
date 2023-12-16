@@ -110,27 +110,11 @@ require('lazy').setup({
   'stevearc/conform.nvim',
   'mfussenegger/nvim-jdtls',
   {
-    'zbirenbaum/copilot.lua',
-    event = 'InsertEnter',
-    config = function()
-      require('copilot').setup({
-        suggestion = { enabled = false },
-        panel = { enabled = false },
-      })
-    end,
-  },
-  {
-    'zbirenbaum/copilot-cmp',
-    config = function()
-      require('copilot_cmp').setup()
-    end
-  },
-  {
     'DNLHC/glance.nvim',
     cmd = 'Glance',
     config = function()
       require('glance').setup({
-        height = 20,
+        height = 25,
         detached = false,
         preview_win_opts = {
           number = false
