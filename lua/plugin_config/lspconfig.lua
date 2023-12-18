@@ -10,11 +10,8 @@ local on_attach = function(client, bufnr)
   mapbuf('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opt)
   mapbuf('n', 'gh', '<cmd>lua vim.lsp.buf.hover()<CR>', opt)
   mapbuf('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opt)
-  -- mapbuf('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opt)
   mapbuf('n', 'gd', '<cmd>Glance definitions<CR>', opt)
-  -- mapbuf('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opt)
   mapbuf('n', 'gi', '<cmd>Glance implementations<CR>', opt)
-  -- mapbuf('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opt)
   mapbuf('n', 'gr', '<cmd>Glance references<CR>', opt)
   mapbuf('n', 'gt', '<cmd>Glance type_definitions<CR>', opt)
   mapbuf('n', 'go', '<cmd>lua vim.diagnostic.open_float()<CR>', opt)
@@ -328,9 +325,9 @@ lspconfig.rust_analyzer.setup({
   capabilities = rust_capabilities(),
   settings = {
     ['rust-analyzer'] = {
-      -- cargo = {
-      --   target = 'wasm32-unknown-unknown'
-      -- },
+      cargo = {
+        -- target = 'wasm32-unknown-unknown'
+      },
       diagnostics = {
         enable = true,
       },
