@@ -310,7 +310,6 @@ local function rust_capabilities()
   capabilities.experimental.commands = {
     commands = {
       'rust-analyzer.runSingle',
-      'rust-analyzer.debugSingle',
       'rust-analyzer.showReferences',
       'rust-analyzer.gotoLocation',
       'editor.action.triggerParameterHints',
