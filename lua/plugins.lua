@@ -69,13 +69,6 @@ require('lazy').setup({
   },
   'famiu/bufdelete.nvim',
   {
-    'akinsho/toggleterm.nvim',
-    version = '*',
-    config = function()
-      require('toggleterm').setup({})
-    end
-  },
-  {
     'saecki/crates.nvim',
     tag = 'v0.4.0',
     dependencies = 'nvim-lua/plenary.nvim',
@@ -98,12 +91,6 @@ require('lazy').setup({
       require('gitsigns').setup({})
     end
   },
-  {
-    'utilyre/barbecue.nvim',
-    name = 'barbecue',
-    version = '*',
-    dependencies = 'SmiteshP/nvim-navic'
-  },
   'stevearc/conform.nvim',
   'mfussenegger/nvim-jdtls',
   {
@@ -122,5 +109,10 @@ require('lazy').setup({
   {
     'kevinhwang91/nvim-ufo',
     dependencies = 'kevinhwang91/promise-async'
+  },
+  'hedyhli/outline.nvim',
+  {
+    'gsuuon/model.nvim',
+    cmd = { 'M' }
   }
 })
