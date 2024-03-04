@@ -70,8 +70,7 @@ require('lazy').setup({
   'famiu/bufdelete.nvim',
   {
     'saecki/crates.nvim',
-    tag = 'v0.4.0',
-    dependencies = 'nvim-lua/plenary.nvim',
+    tag = 'stable',
     config = function()
       require('crates').setup({})
     end
