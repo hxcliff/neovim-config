@@ -200,7 +200,6 @@ local function typescript_capabilities()
       resolveProvider = true,
     },
   }
-
   return capabilities
 end
 
@@ -235,7 +234,6 @@ local function dart_root_dir(_)
   })[1])
 end
 
-
 local function dart_capabilities()
   local capabilities = protocol.make_client_capabilities()
   capabilities.workspace.configuration = true
@@ -245,7 +243,6 @@ local function dart_capabilities()
   capabilities.textDocument.completion.completionItem.resolveSupport = {
     properties = { 'documentation', 'detail', 'additionalTextEdits' },
   }
-
   return capabilities
 end
 
@@ -325,7 +322,7 @@ lspconfig.rust_analyzer.setup({
   settings = {
     ['rust-analyzer'] = {
       cargo = {
-        -- target = 'wasm32-unknown-unknown'
+        -- target = ''
       },
       diagnostics = {
         enable = true,
@@ -352,41 +349,6 @@ vim.api.nvim_create_autocmd('BufWritePost', {
           end
         end, 0)
       end
-    end
-  end,
-  group = group,
-})
-
-vim.api.nvim_create_autocmd('VimEnter', {
-  pattern = '*.rs',
-  callback = function()
-    local bufnr = vim.api.nvim_get_current_buf()
-    local rust = vim.api.nvim_buf_get_option(bufnr, 'ft') == 'rust'
-
-    if rust and (rust_root_dir() == nil)
-    then
-      local config = {
-        on_attach = on_attach,
-        root_dir = vim.api.nvim_buf_get_name(0),
-        init_options = {
-          detachedFiles = {
-            vim.api.nvim_buf_get_name(0)
-          }
-        },
-        capabilities = rust_capabilities(),
-        settings = {
-          ['rust-analyzer'] = {
-            diagnostics = {
-              enable = true,
-            },
-            inlayHints = {
-              maxLength = 512
-            }
-          }
-        }
-      }
-
-      vim.lsp.start_client(config)
     end
   end,
   group = group,

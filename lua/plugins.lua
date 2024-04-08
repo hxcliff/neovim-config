@@ -91,7 +91,6 @@ require('lazy').setup({
     end
   },
   'stevearc/conform.nvim',
-  'mfussenegger/nvim-jdtls',
   {
     'DNLHC/glance.nvim',
     cmd = 'Glance',
@@ -108,10 +107,5 @@ require('lazy').setup({
   {
     'kevinhwang91/nvim-ufo',
     dependencies = 'kevinhwang91/promise-async'
-  },
-  'hedyhli/outline.nvim',
-  {
-    'gsuuon/model.nvim',
-    cmd = { 'M' }
   }
 })
