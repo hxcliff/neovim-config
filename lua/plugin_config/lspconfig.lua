@@ -3,6 +3,10 @@ local lspconfig_util = require('lspconfig.util')
 local protocol = require('vim.lsp.protocol')
 
 local on_attach = function(client, bufnr)
+  if client.name == "yamlls" then
+    client.server_capabilities.documentFormattingProvider = true
+  end
+
   local opt = { noremap = true, silent = true }
   local function mapbuf(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 
