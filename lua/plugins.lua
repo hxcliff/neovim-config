@@ -52,8 +52,7 @@ require('lazy').setup({
   'onsails/lspkind-nvim',
   {
     'zbirenbaum/neodim',
-    event = 'LspAttach',
-    branch = 'v2'
+    event = 'LspAttach'
   },
   {
     'j-hui/fidget.nvim'
@@ -64,7 +63,8 @@ require('lazy').setup({
   },
   {
     'akinsho/bufferline.nvim',
-    version = '*',
+    -- version = '*',
+    branch = 'main',
     dependencies = 'nvim-tree/nvim-web-devicons'
   },
   'famiu/bufdelete.nvim',
