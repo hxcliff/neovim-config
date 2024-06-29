@@ -49,10 +49,6 @@ local on_attach = function(client, bufnr)
   end
 end
 
-lspconfig.lemminx.setup({
-  on_attach = on_attach,
-})
-
 lspconfig.lua_ls.setup({
   on_attach = on_attach,
 })
@@ -62,10 +58,6 @@ lspconfig.jsonls.setup({
 })
 
 lspconfig.taplo.setup({
-  on_attach = on_attach,
-})
-
-lspconfig.pylsp.setup({
   on_attach = on_attach,
 })
 
@@ -106,7 +98,6 @@ local function typescript_root_dir(fname)
 
   return root_dir
 end
-
 
 local function typescript_capabilities()
   local capabilities = {
@@ -229,48 +220,6 @@ lspconfig.tsserver.setup({
   root_dir = typescript_root_dir,
   single_file_support = true,
   capabilities = typescript_capabilities()
-})
-
-local function dart_root_dir(_)
-  local ROOT_PATTERNS = { '.git', 'pubspec.yaml' }
-
-  local client = vim.lsp.get_active_clients({ name = 'dartls', bufnr = bufnr })[1]
-  local root_dir = client and client.config.root_dir or nil
-  if root_dir then return root_dir end
-
-  local buf = vim.api.nvim_get_current_buf()
-  local buf_path = vim.api.nvim_buf_get_name(buf)
-
-  return root_dir or vim.fs.dirname(vim.fs.find(ROOT_PATTERNS, {
-    path = buf_path,
-    upward = true,
-  })[1])
-end
-
-local function dart_capabilities()
-  local capabilities = protocol.make_client_capabilities()
-  capabilities.workspace.configuration = true
-  capabilities.workspace.workspaceEdit.documentChanges = true
-  capabilities.textDocument.completion.completionItem.snippetSupport = true
-  capabilities.textDocument.documentColor = { dynamicRegistration = true }
-  capabilities.textDocument.completion.completionItem.resolveSupport = {
-    properties = { 'documentation', 'detail', 'additionalTextEdits' },
-  }
-  return capabilities
-end
-
-lspconfig.dartls.setup({
-  on_attach = on_attach,
-  root_dir = dart_root_dir,
-  settings = {
-    dart = {
-      completeFunctionCalls = true,
-      showTodos = true,
-      analysisExcludedFolders = {},
-      updateImportsOnRename = true,
-    },
-  },
-  capabilities = dart_capabilities()
 })
 
 local M = {}
