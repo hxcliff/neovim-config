@@ -209,7 +209,17 @@ end
 
 lspconfig.tsserver.setup({
   on_attach = on_attach,
+  init_options = {
+    plugins = {
+      {
+        name = '@vue/typescript-plugin',
+        location = vim.fn.stdpath('data') .. '/mason/packages/vue-language-server/node_modules/@vue/language-server/node_modules/@vue/typescript-plugin',
+        languages = { 'javascript', 'typescript', 'vue' },
+      }
+    },
+  },
   filetypes = {
+    'vue',
     'javascript',
     'javascriptreact',
     'javascript.jsx',
@@ -220,6 +230,10 @@ lspconfig.tsserver.setup({
   root_dir = typescript_root_dir,
   single_file_support = true,
   capabilities = typescript_capabilities()
+})
+
+lspconfig.volar.setup({
+  on_attach = on_attach
 })
 
 local M = {}
