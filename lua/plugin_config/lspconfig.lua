@@ -3,18 +3,18 @@ local lspconfig_util = require('lspconfig.util')
 local protocol = require('vim.lsp.protocol')
 
 local on_attach = function(client, bufnr)
-  if client.name == "yamlls" then
+  if client.name == 'yamlls' then
     client.server_capabilities.documentFormattingProvider = true
   end
 
-  -- if client.supports_method("textDocument/inlayHint", { bufnr = bufnr }) then
-  --   vim.api.nvim_create_autocmd({ 'InsertEnter' }, {
-  --     callback = function() vim.lsp.inlay_hint.enable(false, { bufnr = bufnr }) end,
-  --   })
-  --   vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
-  --     callback = function() vim.lsp.inlay_hint.enable(true, { bufnr = bufnr }) end,
-  --   })
-  -- end
+  if client.supports_method('textDocument/inlayHint', { bufnr = bufnr }) then
+    vim.api.nvim_create_autocmd({ 'InsertEnter' }, {
+      callback = function() vim.lsp.inlay_hint.enable(false, { bufnr = bufnr }) end,
+    })
+    vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
+      callback = function() vim.lsp.inlay_hint.enable(true, { bufnr = bufnr }) end,
+    })
+  end
 
   local opt = { noremap = true, silent = true }
   local function mapbuf(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
@@ -65,6 +65,10 @@ lspconfig.yamlls.setup({
   on_attach = on_attach,
 })
 
+lspconfig.lemminx.setup({
+  on_attach = on_attach,
+})
+
 lspconfig.clangd.setup({
   on_attach = on_attach,
 })
@@ -88,8 +92,7 @@ lspconfig.cssls.setup {
 }
 
 local function typescript_root_dir(fname)
-  local root_dir = lspconfig_util.root_pattern 'tsconfig.json' (fname) or
-      lspconfig_util.root_pattern('package.json', 'jsconfig.json', '.git')(fname)
+  local root_dir = lspconfig_util.root_pattern 'tsconfig.json' (fname) or lspconfig_util.root_pattern('package.json', 'jsconfig.json', '.git')(fname)
 
   local node_modules_index = root_dir and root_dir:find('node_modules', 1, true)
   if node_modules_index and node_modules_index > 0 then

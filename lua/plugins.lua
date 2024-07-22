@@ -110,5 +110,6 @@ require('lazy').setup({
   },
   'Bekaboo/dropbar.nvim',
   'williamboman/mason.nvim',
-  'williamboman/mason-lspconfig.nvim'
+  'williamboman/mason-lspconfig.nvim',
+  'mfussenegger/nvim-jdtls'
 })
