@@ -43,7 +43,7 @@ jdtls.start_or_attach({
   handlers = handlers,
   settings = {
     java = {
-      home = '/usr/lib/jvm/temurin-17-jdk-amd64',
+      home = '/usr/lib/jvm/temurin-21-jdk-amd64',
       configuration = {
         runtimes = {
           {
@@ -57,6 +57,10 @@ jdtls.start_or_attach({
           {
             name = 'JavaSE-17',
             path = '/usr/lib/jvm/temurin-17-jdk-amd64',
+          },
+          {
+            name = 'JavaSE-21',
+            path = '/usr/lib/jvm/temurin-21-jdk-amd64',
           },
         }
       }

@@ -7,14 +7,14 @@ local on_attach = function(client, bufnr)
     client.server_capabilities.documentFormattingProvider = true
   end
 
-  if client.supports_method('textDocument/inlayHint', { bufnr = bufnr }) then
-    vim.api.nvim_create_autocmd({ 'InsertEnter' }, {
-      callback = function() vim.lsp.inlay_hint.enable(false, { bufnr = bufnr }) end,
-    })
-    vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
-      callback = function() vim.lsp.inlay_hint.enable(true, { bufnr = bufnr }) end,
-    })
-  end
+  -- if client.supports_method('textDocument/inlayHint', { bufnr = bufnr }) then
+  --   vim.api.nvim_create_autocmd({ 'InsertEnter' }, {
+  --     callback = function() vim.lsp.inlay_hint.enable(false, { bufnr = bufnr }) end,
+  --   })
+  --   vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
+  --     callback = function() vim.lsp.inlay_hint.enable(true, { bufnr = bufnr }) end,
+  --   })
+  -- end
 
   local opt = { noremap = true, silent = true }
   local function mapbuf(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
