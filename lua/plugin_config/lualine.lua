@@ -28,7 +28,7 @@ local config = {
   options = {
     component_separators = '',
     section_separators = '',
-    theme = 'catppuccin-mocha'
+    theme = 'nord'
   },
   extensions = { 'neo-tree', 'toggleterm', 'quickfix', 'lazy' },
   sections = {

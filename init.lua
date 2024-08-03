@@ -15,7 +15,7 @@ require('basic')
 require('keybindings')
 
 require('plugins')
-require('plugin_config/catppuccin')
+-- require('plugin_config/catppuccin')
 require('plugin_config/bufferline')
 require('plugin_config/lualine')
 require('plugin_config/telescope')
