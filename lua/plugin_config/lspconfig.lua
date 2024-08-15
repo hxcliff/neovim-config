@@ -49,6 +49,11 @@ local on_attach = function(client, bufnr)
   end
 end
 
+lspconfig.slint_lsp.setup({
+  cmd = { "slint-lsp", "--no-toolbar" },
+  on_attach = on_attach
+})
+
 lspconfig.lua_ls.setup({
   on_attach = on_attach,
 })
@@ -407,4 +412,11 @@ vim.api.nvim_create_autocmd('BufWritePost', {
     end
   end,
   group = vim.api.nvim_create_augroup('RustToolsAutocmds', { clear = true }),
+})
+
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+  pattern = "*.slint",
+  callback = function()
+    vim.bo.filetype = "slint"
+  end
 })
