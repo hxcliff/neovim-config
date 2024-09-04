@@ -4,6 +4,9 @@ vim.g.maplocalleader = ' '
 local map = vim.api.nvim_set_keymap
 local opt = { noremap = true, silent = true }
 
+-- disable gf
+map('n', 'gf', '<nop>', opt)
+
 map('v', '<C-y>', '"+y', opt)
 map('i', '<C-f>', '<Right>', opt)
 

@@ -50,7 +50,7 @@ local on_attach = function(client, bufnr)
 end
 
 lspconfig.slint_lsp.setup({
-  cmd = { "slint-lsp", "--no-toolbar" },
+  cmd = { "slint-lsp", "--backend", "software" },
   on_attach = on_attach
 })
 
