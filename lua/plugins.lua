@@ -1,6 +1,6 @@
 require('lazy').setup({
-  
-{
+
+  {
     'gbprod/nord.nvim',
     lazy = false,
     priority = 1000,
@@ -116,5 +116,6 @@ require('lazy').setup({
   'Bekaboo/dropbar.nvim',
   'williamboman/mason.nvim',
   'williamboman/mason-lspconfig.nvim',
-  'mfussenegger/nvim-jdtls'
+  'mfussenegger/nvim-jdtls',
+  'tzachar/highlight-undo.nvim'
 })

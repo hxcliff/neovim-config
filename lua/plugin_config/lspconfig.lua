@@ -215,7 +215,7 @@ local function typescript_capabilities()
   return capabilities
 end
 
-lspconfig.tsserver.setup({
+lspconfig.ts_ls.setup({
   on_attach = on_attach,
   init_options = {
     plugins = {
