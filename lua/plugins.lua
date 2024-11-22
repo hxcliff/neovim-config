@@ -114,5 +114,15 @@ require('lazy').setup({
   },
   'williamboman/mason.nvim',
   'williamboman/mason-lspconfig.nvim',
-  'mfussenegger/nvim-jdtls'
+  'mfussenegger/nvim-jdtls',
+  {
+    'MeanderingProgrammer/render-markdown.nvim',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+      'nvim-tree/nvim-web-devicons'
+    },
+    config = function()
+      require('render-markdown').setup({})
+    end
+  }
 })
