@@ -1,5 +1,4 @@
 require('lazy').setup({
-
   {
     'gbprod/nord.nvim',
     lazy = false,
@@ -40,9 +39,9 @@ require('lazy').setup({
   },
   'nvim-telescope/telescope-ui-select.nvim',
   {
-    'windwp/nvim-autopairs',
+    'm4xshen/autoclose.nvim',
     config = function()
-      require('nvim-autopairs').setup({})
+      require('autoclose').setup({})
     end
   },
   'neovim/nvim-lspconfig',
@@ -113,9 +112,7 @@ require('lazy').setup({
     'kevinhwang91/nvim-ufo',
     dependencies = 'kevinhwang91/promise-async'
   },
-  'Bekaboo/dropbar.nvim',
   'williamboman/mason.nvim',
   'williamboman/mason-lspconfig.nvim',
-  'mfussenegger/nvim-jdtls',
-  'tzachar/highlight-undo.nvim'
+  'mfussenegger/nvim-jdtls'
 })

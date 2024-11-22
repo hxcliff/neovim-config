@@ -4,9 +4,17 @@ local cmp = require('cmp')
 local luasnip_vscode = require('luasnip.loaders.from_vscode')
 
 cmp.setup({
+  enabled = function()
+    local context = require 'cmp.config.context'
+    if vim.api.nvim_get_mode().mode == 'c' then
+      return true
+    else
+      return not context.in_treesitter_capture("comment") and not context.in_syntax_group("Comment")
+    end
+  end,
   preselect = cmp.PreselectMode.None,
   completion = {
-    completeopt = 'menu,menuone,noinsert,noselect',
+    completeopt = 'menuone,noinsert,noselect',
   },
   snippet = {
     expand = function(args) luasnip.lsp_expand(args.body) end
@@ -52,7 +60,7 @@ cmp.setup({
 })
 
 cmp.setup.cmdline({ '/', '?' }, {
-  completion = { autocomplete = false, completeopt = 'menu,menuone,noinsert,preview' },
+  completion = { autocomplete = false, completeopt = 'menuone,noinsert,preview' },
   sources = {
     {
       name = 'buffer',
@@ -64,7 +72,7 @@ cmp.setup.cmdline({ '/', '?' }, {
 })
 
 cmp.setup.cmdline(':', {
-  completion = { autocomplete = false, completeopt = 'menu,menuone,noinsert,preview' },
+  completion = { autocomplete = false, completeopt = 'menuone,noinsert,preview' },
   sources = cmp.config.sources({
     { name = 'path' }
   }, {
