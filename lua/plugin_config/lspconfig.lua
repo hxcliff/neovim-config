@@ -421,7 +421,7 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   end
 })
 
-vim.system({ '/home/arch/rime_ls', '--listen', '127.0.0.1:9257' })
+vim.system({ 'rime_ls', '--listen', '127.0.0.1:9257' })
 
 local start_rime = function()
   local client_id = vim.lsp.start_client({
