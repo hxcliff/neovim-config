@@ -113,6 +113,5 @@ require('lazy').setup({
     dependencies = 'kevinhwang91/promise-async'
   },
   'williamboman/mason.nvim',
-  'williamboman/mason-lspconfig.nvim',
-  'mfussenegger/nvim-jdtls'
+  'williamboman/mason-lspconfig.nvim'
 })

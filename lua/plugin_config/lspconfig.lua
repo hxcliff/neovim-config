@@ -7,14 +7,14 @@ local on_attach = function(client, bufnr)
     client.server_capabilities.documentFormattingProvider = true
   end
 
-  -- if client.supports_method('textDocument/inlayHint', { bufnr = bufnr }) then
-  --   vim.api.nvim_create_autocmd({ 'InsertEnter' }, {
-  --     callback = function() vim.lsp.inlay_hint.enable(false, { bufnr = bufnr }) end,
-  --   })
-  --   vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
-  --     callback = function() vim.lsp.inlay_hint.enable(true, { bufnr = bufnr }) end,
-  --   })
-  -- end
+  if client.supports_method('textDocument/inlayHint', { bufnr = bufnr }) then
+    vim.api.nvim_create_autocmd({ 'InsertEnter' }, {
+      callback = function() vim.lsp.inlay_hint.enable(false, { bufnr = bufnr }) end,
+    })
+    vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
+      callback = function() vim.lsp.inlay_hint.enable(true, { bufnr = bufnr }) end,
+    })
+  end
 
   local opt = { noremap = true, silent = true }
   local function mapbuf(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
@@ -426,7 +426,6 @@ vim.system({ '/home/arch/rime_ls', '--listen', '127.0.0.1:9257' })
 local start_rime = function()
   local client_id = vim.lsp.start_client({
     name = "rime-ls",
-    -- cmd = { '/home/arch/rime_ls' },
     cmd = vim.lsp.rpc.connect("127.0.0.1", 9257),
     init_options = {
       enabled = true,
@@ -434,7 +433,7 @@ local start_rime = function()
       user_data_dir = "~/.config/nvim/rime-ls/data",
       log_dir = "~/.config/nvim/rime-ls/logs",
       max_candidates = 5,
-      paging_characters = { ",", ".", "-", "=" },
+      paging_characters = { "-", "=" },
       trigger_characters = {},
       schema_trigger_character = "&",
       always_incomplete = false,

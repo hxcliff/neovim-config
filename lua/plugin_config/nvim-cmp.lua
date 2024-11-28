@@ -12,30 +12,11 @@ cmp.setup({
       return not context.in_treesitter_capture("comment") and not context.in_syntax_group("Comment")
     end
   end,
-  preselect = cmp.PreselectMode.None,
   completion = {
-    completeopt = 'menuone,noinsert,noselect',
+    completeopt = 'menu,menuone',
   },
   snippet = {
     expand = function(args) luasnip.lsp_expand(args.body) end
-  },
-  matching = {
-    disallow_fuzzy_matching = false,
-    disallow_fullfuzzy_matching = false,
-    disallow_partial_fuzzy_matching = false,
-  },
-  sorting = {
-    comparators = {
-      cmp.config.compare.offset,
-      cmp.config.compare.exact,
-      cmp.config.compare.score,
-      cmp.config.compare.recently_used,
-      cmp.config.compare.locality,
-      cmp.config.compare.kind,
-      cmp.config.compare.sort_text,
-      cmp.config.compare.length,
-      cmp.config.compare.order,
-    },
   },
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
@@ -60,7 +41,7 @@ cmp.setup({
 })
 
 cmp.setup.cmdline({ '/', '?' }, {
-  completion = { autocomplete = false, completeopt = 'menuone,noinsert,preview' },
+  completion = { autocomplete = false, completeopt = 'menu,menuone,preview' },
   sources = {
     {
       name = 'buffer',
@@ -72,7 +53,7 @@ cmp.setup.cmdline({ '/', '?' }, {
 })
 
 cmp.setup.cmdline(':', {
-  completion = { autocomplete = false, completeopt = 'menuone,noinsert,preview' },
+  completion = { autocomplete = false, completeopt = 'menu,menuone,preview' },
   sources = cmp.config.sources({
     { name = 'path' }
   }, {
