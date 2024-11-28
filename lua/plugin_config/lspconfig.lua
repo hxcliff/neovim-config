@@ -49,11 +49,6 @@ local on_attach = function(client, bufnr)
   end
 end
 
-lspconfig.slint_lsp.setup({
-  cmd = { "slint-lsp", "--backend", "software" },
-  on_attach = on_attach
-})
-
 lspconfig.lua_ls.setup({
   on_attach = on_attach,
 })
@@ -67,10 +62,6 @@ lspconfig.taplo.setup({
 })
 
 lspconfig.yamlls.setup({
-  on_attach = on_attach,
-})
-
-lspconfig.lemminx.setup({
   on_attach = on_attach,
 })
 
@@ -217,17 +208,7 @@ end
 
 lspconfig.ts_ls.setup({
   on_attach = on_attach,
-  init_options = {
-    plugins = {
-      {
-        name = '@vue/typescript-plugin',
-        location = vim.fn.stdpath('data') .. '/mason/packages/vue-language-server/node_modules/@vue/language-server/node_modules/@vue/typescript-plugin',
-        languages = { 'javascript', 'typescript', 'vue' },
-      }
-    },
-  },
   filetypes = {
-    'vue',
     'javascript',
     'javascriptreact',
     'javascript.jsx',
@@ -238,10 +219,6 @@ lspconfig.ts_ls.setup({
   root_dir = typescript_root_dir,
   single_file_support = true,
   capabilities = typescript_capabilities()
-})
-
-lspconfig.volar.setup({
-  on_attach = on_attach
 })
 
 local M = {}

@@ -3,5 +3,5 @@ local mason_lspconfig = require('mason-lspconfig')
 
 mason.setup({})
 mason_lspconfig.setup({
-  ensure_installed = { 'jdtls', 'lemminx', 'lua_ls', 'jsonls', 'taplo', 'yamlls', 'html', 'cssls', 'ts_ls', 'volar', 'rust_analyzer', 'clangd', 'slint_lsp' },
+  ensure_installed = { 'lua_ls', 'jsonls', 'taplo', 'yamlls', 'html', 'cssls', 'ts_ls', 'rust_analyzer', 'clangd' },
 })
