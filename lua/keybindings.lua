@@ -38,36 +38,42 @@ local pluginKeys = {}
 pluginKeys.cmp = function(cmp)
   local luasnip = require('luasnip')
 
-  local has_words_before = function()
-    if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
-    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-    return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
-  end
-
   return {
-    ['<Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() and has_words_before() then
+    ["<CR>"] = cmp.mapping({
+      i = function(fallback)
+        if cmp.visible() then
+          if luasnip.expandable() then
+            luasnip.expand()
+          else
+            cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+          end
+        else
+          fallback()
+        end
+      end,
+      s = cmp.mapping.confirm({ select = true }),
+      c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+    }),
+    ["<Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
         cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
+      elseif luasnip.locally_jumpable(1) then
+        luasnip.jump(1)
       else
         fallback()
       end
-    end, { 'i', 's' }),
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
+    end, { "i", "s" }),
+    ["<S-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
+      elseif luasnip.locally_jumpable(-1) then
         luasnip.jump(-1)
       else
         fallback()
       end
-    end, { 'i', 's' }),
-    ['<Down>'] = cmp.mapping.select_next_item(),
-    ['<Up>'] = cmp.mapping.select_prev_item(),
+    end, { "i", "s" }),
     ['<C-e>'] = cmp.mapping.close(),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<CR>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true })
+    ['<C-d>'] = cmp.mapping.complete(),
   }
 end
 

@@ -7,15 +7,6 @@ local on_attach = function(client, bufnr)
     client.server_capabilities.documentFormattingProvider = true
   end
 
-  if client.supports_method('textDocument/inlayHint', { bufnr = bufnr }) then
-    vim.api.nvim_create_autocmd({ 'InsertEnter' }, {
-      callback = function() vim.lsp.inlay_hint.enable(false, { bufnr = bufnr }) end,
-    })
-    vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
-      callback = function() vim.lsp.inlay_hint.enable(true, { bufnr = bufnr }) end,
-    })
-  end
-
   local opt = { noremap = true, silent = true }
   local function mapbuf(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 
@@ -88,7 +79,8 @@ lspconfig.cssls.setup {
 }
 
 local function typescript_root_dir(fname)
-  local root_dir = lspconfig_util.root_pattern 'tsconfig.json' (fname) or lspconfig_util.root_pattern('package.json', 'jsconfig.json', '.git')(fname)
+  local root_dir = lspconfig_util.root_pattern 'tsconfig.json' (fname) or
+      lspconfig_util.root_pattern('package.json', 'jsconfig.json', '.git')(fname)
 
   local node_modules_index = root_dir and root_dir:find('node_modules', 1, true)
   if node_modules_index and node_modules_index > 0 then
@@ -236,7 +228,7 @@ end
 
 M.get_clients = vim.lsp.get_clients or vim.lsp.get_active_clients
 
-M.get_active_rustaceanvim_clients = function(bufnr, filter)
+M.get_active_rust_clients = function(bufnr, filter)
   filter = vim.tbl_deep_extend('force', filter or {}, {
     name = 'rust-analyzer',
   })
@@ -267,7 +259,7 @@ local function get_active_client_root(file_name)
   for _, item in ipairs { toolchains, registry } do
     item = M.normalize_path_on_windows(item)
     if file_name:sub(1, #item) == item then
-      local clients = M.get_active_rustaceanvim_clients()
+      local clients = M.get_active_rust_clients()
       return clients and #clients > 0 and clients[#clients].config.root_dir or nil
     end
   end
@@ -318,15 +310,12 @@ local function rust_root_dir(file_name)
       })[1])
 end
 
-local function rust_capabilities()
-  local capabilities = protocol.make_client_capabilities()
+local function mk_rustcap()
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
-  capabilities.textDocument.foldingRange = {
-    dynamicRegistration = false,
-    lineFoldingOnly = true,
-  }
   capabilities.experimental = {
     hoverActions = true,
+    colorDiagnosticOutput = true,
     hoverRange = true,
     serverStatusNotification = true,
     snippetTextEdit = true,
@@ -334,17 +323,55 @@ local function rust_capabilities()
     ssr = true
   }
   capabilities.textDocument.completion.completionItem.resolveSupport = {
-    properties = { 'documentation', 'detail', 'additionalTextEdits' },
+    properties = { 'documentation', 'detail', 'additionalTextEdits' }
   }
   capabilities.experimental.commands = {
     commands = {
       'rust-analyzer.runSingle',
       'rust-analyzer.showReferences',
       'rust-analyzer.gotoLocation',
-      'editor.action.triggerParameterHints',
+      'editor.action.triggerParameterHints'
     }
   }
   return capabilities
+end
+
+local function mk_rustcap_if_available(mod_name, callback)
+  local available, mod = pcall(require, mod_name)
+  if available and type(mod) == 'table' then
+    local ok, capabilities = pcall(callback, mod)
+    if ok then
+      return capabilities
+    end
+  end
+  return {}
+end
+
+local function rustcap()
+  local rs_capabilities = mk_rustcap()
+  local cmp_capabilities = mk_rustcap_if_available('cmp_nvim_lsp', function(cmp_nvim_lsp)
+    return cmp_nvim_lsp.default_capabilities()
+  end)
+  local selection_range_capabilities = mk_rustcap_if_available('lsp-selection-range', function(lsp_selection_range)
+    return lsp_selection_range.update_capabilities {}
+  end)
+  local folding_range_capabilities = mk_rustcap_if_available('ufo', function(_)
+    return {
+      textDocument = {
+        foldingRange = {
+          dynamicRegistration = false,
+          lineFoldingOnly = true
+        }
+      }
+    }
+  end)
+  return vim.tbl_deep_extend(
+    'force',
+    rs_capabilities,
+    cmp_capabilities,
+    selection_range_capabilities,
+    folding_range_capabilities
+  )
 end
 
 lspconfig.rust_analyzer.setup({
@@ -352,7 +379,7 @@ lspconfig.rust_analyzer.setup({
   filetypes = { 'rust' },
   on_attach = on_attach,
   root_dir = rust_root_dir,
-  capabilities = rust_capabilities(),
+  capabilities = rustcap(),
   settings = {
     ['rust-analyzer'] = {
       cargo = {

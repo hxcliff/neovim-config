@@ -45,13 +45,20 @@ require('lazy').setup({
     end
   },
   'neovim/nvim-lspconfig',
-  'hrsh7th/nvim-cmp',
+  {
+    'hrsh7th/nvim-cmp',
+    event = { 'InsertEnter', 'CmdlineEnter' }
+  },
   'hrsh7th/cmp-nvim-lsp',
   'hrsh7th/cmp-buffer',
   'hrsh7th/cmp-path',
   'hrsh7th/cmp-cmdline',
   'saadparwaiz1/cmp_luasnip',
-  'L3MON4D3/LuaSnip',
+  {
+    'L3MON4D3/LuaSnip',
+    version = "v2.*",
+    build = "make install_jsregexp"
+  },
   'rafamadriz/friendly-snippets',
   'onsails/lspkind-nvim',
   {
@@ -67,7 +74,7 @@ require('lazy').setup({
   },
   {
     'akinsho/bufferline.nvim',
-    -- version = '*',
+    version = '*',
     branch = 'main',
     dependencies = 'nvim-tree/nvim-web-devicons'
   },
@@ -113,5 +120,11 @@ require('lazy').setup({
     dependencies = 'kevinhwang91/promise-async'
   },
   'williamboman/mason.nvim',
-  'williamboman/mason-lspconfig.nvim'
+  'williamboman/mason-lspconfig.nvim',
+  {
+    'luozhiya/fittencode.nvim',
+    config = function()
+      require('fittencode').setup()
+    end,
+  }
 })

@@ -4,34 +4,38 @@ local cmp = require('cmp')
 local luasnip_vscode = require('luasnip.loaders.from_vscode')
 
 cmp.setup({
-  enabled = function()
-    local context = require 'cmp.config.context'
-    if vim.api.nvim_get_mode().mode == 'c' then
-      return true
-    else
-      return not context.in_treesitter_capture("comment") and not context.in_syntax_group("Comment")
-    end
-  end,
   completion = {
-    completeopt = 'menu,menuone',
+    completeopt = 'menu,menuone,noinsert'
   },
   snippet = {
     expand = function(args) luasnip.lsp_expand(args.body) end
   },
+  sorting = {
+    comparators = {
+      cmp.config.compare.sort_text,
+      cmp.config.compare.offset,
+      cmp.config.compare.exact,
+      cmp.config.compare.score,
+      cmp.config.compare.recently_used,
+      cmp.config.compare.kind,
+      cmp.config.compare.length,
+      cmp.config.compare.order,
+    }
+  },
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
+    { name = 'path' },
     { name = 'luasnip' },
     { name = 'crates' }
   }, {
-    { name = 'buffer' },
-    { name = 'path' }
+    { name = 'buffer' }
   }),
   mapping = require('keybindings').cmp(cmp),
   formatting = {
     format = lspkind.cmp_format({
       mode = 'symbol',
       with_text = true,
-      maxwidth = 50,
+      maxwidth = 80,
       before = function(entry, item)
         item.menu = '[' .. string.upper(entry.source.name) .. ']'
         return item
@@ -41,24 +45,26 @@ cmp.setup({
 })
 
 cmp.setup.cmdline({ '/', '?' }, {
-  completion = { autocomplete = false, completeopt = 'menu,menuone,preview' },
+  mapping = cmp.mapping.preset.cmdline(),
   sources = {
-    {
-      name = 'buffer',
-      option = {
-        keyword_pattern = [=[[^[:blank:]].*]=]
-      }
-    }
+    { name = 'buffer' }
   }
 })
 
 cmp.setup.cmdline(':', {
-  completion = { autocomplete = false, completeopt = 'menu,menuone,preview' },
+  mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
     { name = 'path' }
-  }, {
-    { name = 'cmdline' }
   })
 })
+
+-- cmp.setup.cmdline(':', {
+--   mapping = cmp.mapping.preset.cmdline(),
+--   sources = cmp.config.sources({
+--     { name = 'path' }
+--   }, {
+--     { name = 'cmdline' }
+--   })
+-- })
 
 luasnip_vscode.lazy_load()
