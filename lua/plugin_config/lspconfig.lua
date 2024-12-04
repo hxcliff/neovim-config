@@ -424,33 +424,3 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
     vim.bo.filetype = "slint"
   end
 })
-
-vim.system({ 'rime_ls', '--listen', '127.0.0.1:9257' })
-
-local start_rime = function()
-  local client_id = vim.lsp.start_client({
-    name = "rime-ls",
-    cmd = vim.lsp.rpc.connect("127.0.0.1", 9257),
-    init_options = {
-      enabled = true,
-      shared_data_dir = "~/.config/nvim/rime-ls/share",
-      user_data_dir = "~/.config/nvim/rime-ls/data",
-      log_dir = "~/.config/nvim/rime-ls/logs",
-      max_candidates = 5,
-      paging_characters = { "-", "=" },
-      trigger_characters = {},
-      schema_trigger_character = "&",
-      always_incomplete = false,
-      max_tokens = 0,
-      preselect_first = false,
-    },
-  });
-  vim.lsp.buf_attach_client(0, client_id)
-end
-
-vim.api.nvim_create_autocmd('BufReadPost', {
-  callback = function()
-    start_rime()
-  end,
-  pattern = '*',
-})
