@@ -1,6 +1,7 @@
 local lspconfig = require('lspconfig')
 local lspconfig_util = require('lspconfig.util')
 local protocol = require('vim.lsp.protocol')
+local cmp = require('blink.cmp')
 
 local on_attach = function(client, bufnr)
   if client.name == 'yamlls' then
@@ -62,25 +63,24 @@ lspconfig.clangd.setup({
 
 lspconfig.html.setup({
   on_attach = on_attach,
-  capabilities = (function()
+  capabilities = cmp.get_lsp_capabilities((function()
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities.textDocument.completion.completionItem.snippetSupport = true
     return capabilities
-  end)()
+  end)())
 })
 
 lspconfig.cssls.setup {
   on_attach = on_attach,
-  capabilities = (function()
+  capabilities = cmp.get_lsp_capabilities((function()
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities.textDocument.completion.completionItem.snippetSupport = true
     return capabilities
-  end)(),
+  end)())
 }
 
 local function typescript_root_dir(fname)
-  local root_dir = lspconfig_util.root_pattern 'tsconfig.json' (fname) or
-      lspconfig_util.root_pattern('package.json', 'jsconfig.json', '.git')(fname)
+  local root_dir = lspconfig_util.root_pattern 'tsconfig.json' (fname) or lspconfig_util.root_pattern('package.json', 'jsconfig.json', '.git')(fname)
 
   local node_modules_index = root_dir and root_dir:find('node_modules', 1, true)
   if node_modules_index and node_modules_index > 0 then
@@ -210,7 +210,7 @@ lspconfig.ts_ls.setup({
   },
   root_dir = typescript_root_dir,
   single_file_support = true,
-  capabilities = typescript_capabilities()
+  capabilities = cmp.get_lsp_capabilities(typescript_capabilities())
 })
 
 local M = {}
@@ -379,7 +379,7 @@ lspconfig.rust_analyzer.setup({
   filetypes = { 'rust' },
   on_attach = on_attach,
   root_dir = rust_root_dir,
-  capabilities = rustcap(),
+  capabilities = cmp.get_lsp_capabilities(rustcap()),
   settings = {
     ['rust-analyzer'] = {
       cargo = {

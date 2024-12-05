@@ -38,28 +38,18 @@ require('lazy').setup({
     dependencies = 'nvim-lua/plenary.nvim'
   },
   'nvim-telescope/telescope-ui-select.nvim',
-  {
-    'm4xshen/autoclose.nvim',
-    config = function()
-      require('autoclose').setup({})
-    end
-  },
   'neovim/nvim-lspconfig',
   {
-    'hrsh7th/nvim-cmp',
-    event = { 'InsertEnter', 'CmdlineEnter' }
+    'saghen/blink.cmp',
+    lazy = false,
+    version = 'v0.*'
   },
-  'hrsh7th/cmp-nvim-lsp',
-  'hrsh7th/cmp-buffer',
-  'hrsh7th/cmp-path',
-  'hrsh7th/cmp-cmdline',
-  'saadparwaiz1/cmp_luasnip',
+  'rafamadriz/friendly-snippets',
   {
     'L3MON4D3/LuaSnip',
     version = "v2.*",
     build = "make install_jsregexp"
   },
-  'rafamadriz/friendly-snippets',
   'onsails/lspkind-nvim',
   {
     'zbirenbaum/neodim',
@@ -120,11 +110,5 @@ require('lazy').setup({
     dependencies = 'kevinhwang91/promise-async'
   },
   'williamboman/mason.nvim',
-  'williamboman/mason-lspconfig.nvim',
-  {
-    'luozhiya/fittencode.nvim',
-    config = function()
-      require('fittencode').setup()
-    end,
-  }
+  'williamboman/mason-lspconfig.nvim'
 })
