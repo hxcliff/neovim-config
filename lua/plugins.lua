@@ -50,7 +50,6 @@ require('lazy').setup({
     version = "v2.*",
     build = "make install_jsregexp"
   },
-  'onsails/lspkind-nvim',
   {
     'zbirenbaum/neodim',
     event = 'LspAttach'
