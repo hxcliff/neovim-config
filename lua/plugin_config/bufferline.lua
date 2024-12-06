@@ -1,7 +1,7 @@
 local bufferline = require('bufferline')
 
 bufferline.setup({
-  highlights = require('nord.plugins.bufferline').akinsho(),
+  highlights = require('catppuccin.groups.integrations.bufferline').get(),
   options = {
     separator_style = 'thin',
     close_command = 'Bdelete %d',

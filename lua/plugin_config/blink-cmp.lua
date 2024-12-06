@@ -12,7 +12,6 @@ cmp.setup({
     ['<S-Tab>'] = { 'snippet_backward', 'fallback' }
   },
   appearance = {
-    use_nvim_cmp_as_default = true,
     nerd_font_variant = 'mono'
   },
   snippets = {
@@ -30,37 +29,36 @@ cmp.setup({
       enabled_providers = { 'lsp', 'path', 'luasnip', 'buffer' }
     }
   },
+  signature = {
+    enabled = true
+  },
   completion = {
+    accept = {
+      auto_brackets = {
+        enabled = true
+      }
+    },
     menu = {
-      auto_show_delay_ms = 500,
       draw = {
-        padding = { 1, 0 },
+        treesitter = true,
+        padding = { 1, 1 },
         columns = { { 'label', 'label_description', gap = 1 }, { 'kind_icon', 'kind', gap = 1 } },
         components = {
-          kind_icon = {
-            ellipsis = false,
-            width = { fill = true }
-          },
           kind = {
-            ellipsis = false,
             width = { fill = true }
           },
           label = {
-            ellipsis = true,
             width = { max = 20 }
           },
           label_description = {
-            ellipsis = true,
             width = { max = 15 }
           }
         }
       }
     },
-    accept = { auto_brackets = { enabled = true } },
-    signature = { enabled = true },
     documentation = {
       auto_show = true,
-      auto_show_delay_ms = 250
+      auto_show_delay_ms = 50
     }
   }
 })

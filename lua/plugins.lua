@@ -1,12 +1,25 @@
 require('lazy').setup({
   {
-    'gbprod/nord.nvim',
-    lazy = false,
+    'catppuccin/nvim',
+    name = 'catppuccin',
     priority = 1000,
     config = function()
-      require('nord').setup({})
-      vim.cmd.colorscheme('nord')
-    end,
+      require('catppuccin').setup({
+        integrations = {
+          blink_cmp = true,
+          fidget = true,
+          indent_blankline = {
+            colored_indent_levels = true
+          },
+          mason = true,
+          telescope = {
+            enabled = true,
+            style = 'nvchad'
+          }
+        }
+      })
+      vim.cmd.colorscheme('catppuccin-frappe')
+    end
   },
   {
     'nvim-lualine/lualine.nvim',
@@ -47,8 +60,8 @@ require('lazy').setup({
   'rafamadriz/friendly-snippets',
   {
     'L3MON4D3/LuaSnip',
-    version = "v2.*",
-    build = "make install_jsregexp"
+    version = 'v2.*',
+    build = 'make install_jsregexp'
   },
   {
     'zbirenbaum/neodim',

@@ -2,7 +2,16 @@ local ibl = require('ibl')
 
 ibl.setup({
   indent = {
-    char = '▏'
+    char = '▏',
+    highlight = {
+      "RainbowRed",
+      "RainbowYellow",
+      "RainbowBlue",
+      "RainbowOrange",
+      "RainbowGreen",
+      "RainbowViolet",
+      "RainbowCyan"
+    }
   },
   scope = {
     show_start = false,
