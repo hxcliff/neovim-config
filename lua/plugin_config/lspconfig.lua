@@ -382,9 +382,6 @@ lspconfig.rust_analyzer.setup({
   capabilities = cmp.get_lsp_capabilities(rustcap()),
   settings = {
     ['rust-analyzer'] = {
-      cargo = {
-        -- target = ''
-      },
       diagnostics = {
         enable = true,
       },
@@ -416,11 +413,4 @@ vim.api.nvim_create_autocmd('BufWritePost', {
     end
   end,
   group = vim.api.nvim_create_augroup('RustToolsAutocmds', { clear = true }),
-})
-
-vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-  pattern = "*.slint",
-  callback = function()
-    vim.bo.filetype = "slint"
-  end
 })
