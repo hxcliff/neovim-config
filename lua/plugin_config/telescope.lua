@@ -8,9 +8,6 @@ telescope.setup({
     live_grep = {
       additional_args = function() return { '--no-require-git' } end
     }
-  },
-  defaults = {
-    borderchars = { '─', '│', '─', '│', '┌', '┐', '┘', '└' }
   }
 })
 
