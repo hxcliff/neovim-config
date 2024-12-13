@@ -98,3 +98,7 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.bo.shiftwidth = width
   end
 })
+
+vim.api.nvim_create_autocmd({ 'FocusGained', 'BufEnter' }, {
+  command = 'checktime',
+})

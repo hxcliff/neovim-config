@@ -57,6 +57,12 @@ require('lazy').setup({
     lazy = false,
     version = 'v0.*'
   },
+  {
+    'm4xshen/autoclose.nvim',
+    config = function()
+      require('autoclose').setup({})
+    end
+  },
   'rafamadriz/friendly-snippets',
   {
     'L3MON4D3/LuaSnip',
@@ -122,5 +128,9 @@ require('lazy').setup({
     dependencies = 'kevinhwang91/promise-async'
   },
   'williamboman/mason.nvim',
-  'williamboman/mason-lspconfig.nvim'
+  'williamboman/mason-lspconfig.nvim',
+  {
+    'MeanderingProgrammer/render-markdown.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }
+  }
 })
