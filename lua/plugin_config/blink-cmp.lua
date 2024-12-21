@@ -25,9 +25,7 @@ cmp.setup({
     jump = function(direction) luasnip.jump(direction) end,
   },
   sources = {
-    completion = {
-      enabled_providers = { 'lsp', 'path', 'luasnip', 'buffer' }
-    }
+    default = { 'lsp', 'path', 'luasnip', 'buffer' }
   },
   signature = {
     enabled = true
@@ -40,7 +38,7 @@ cmp.setup({
     },
     menu = {
       draw = {
-        treesitter = true,
+        treesitter = {},
         padding = { 1, 1 },
         columns = { { 'label', 'label_description', gap = 1 }, { 'kind_icon', 'kind', gap = 1 } },
         components = {
