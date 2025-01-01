@@ -3,7 +3,7 @@ local treesitter = require('nvim-treesitter.configs')
 treesitter.setup({
   ensure_installed = {
     'python', 'lua', 'java', 'rust', 'json', 'html', 'css', 'javascript', 'dart', 'yaml', 'toml', 'c_sharp', 'c', 'cpp',
-    'markdown', 'markdown_inline', 'kotlin', 'zig', 'slint'
+    'markdown', 'markdown_inline', 'kotlin', 'zig'
   },
   highlight = {
     enable = true,

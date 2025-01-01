@@ -10,7 +10,7 @@ neo_tree.setup({
     mappings = {
       ["<space>"] = {
         "toggle_node",
-        nowait = false,
+        nowait = false
       },
       ["<2-LeftMouse>"] = "open",
       ["<cr>"] = "open",
@@ -19,12 +19,7 @@ neo_tree.setup({
       ["l"] = "focus_preview",
       ["C"] = "close_node",
       ["z"] = "close_all_nodes",
-      ["a"] = {
-        "add",
-        config = {
-          show_path = "none"
-        }
-      },
+      ["a"] = { "add", config = { show_path = "none" } },
       ["A"] = "add_directory",
       ["d"] = "delete",
       ["r"] = "rename",
@@ -37,7 +32,7 @@ neo_tree.setup({
       ["?"] = "show_help",
       ["<"] = "prev_source",
       [">"] = "next_source",
-      ["i"] = "show_file_details",
+      ["i"] = "show_file_details"
     }
   },
   filesystem = {
