@@ -4,6 +4,8 @@ local protocol = require('vim.lsp.protocol')
 local cmp = require('blink.cmp')
 
 local on_attach = function(client, bufnr)
+  client.server_capabilities.semanticTokensProvider = nil
+
   if client.name == 'yamlls' then
     client.server_capabilities.documentFormattingProvider = true
   end
