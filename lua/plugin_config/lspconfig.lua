@@ -4,7 +4,9 @@ local protocol = require('vim.lsp.protocol')
 local cmp = require('blink.cmp')
 
 local on_attach = function(client, bufnr)
-  client.server_capabilities.semanticTokensProvider = nil
+  if client.name == 'rust-analyzer' then
+    client.server_capabilities.semanticTokensProvider = nil
+  end
 
   if client.name == 'yamlls' then
     client.server_capabilities.documentFormattingProvider = true
