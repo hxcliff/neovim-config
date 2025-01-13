@@ -15,6 +15,7 @@ cmp.setup({
     nerd_font_variant = 'mono'
   },
   snippets = {
+    preset = 'luasnip',
     expand = function(snippet) luasnip.lsp_expand(snippet) end,
     active = function(filter)
       if filter and filter.direction then
@@ -25,7 +26,7 @@ cmp.setup({
     jump = function(direction) luasnip.jump(direction) end,
   },
   sources = {
-    default = { 'lsp', 'path', 'luasnip', 'buffer' }
+    default = { 'lsp', 'path', 'snippets', 'buffer' }
   },
   signature = {
     enabled = true
