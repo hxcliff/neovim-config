@@ -253,6 +253,34 @@ M.normalize_path_on_windows = function(path)
   return path
 end
 
+local function parse_snippet_fallback(input)
+  local output = input
+      -- $0 -> Nothing
+      :gsub('%$%d', '')
+      -- ${0:_} -> _
+      :gsub('%${%d:(.-)}', '%1')
+      :gsub([[\}]], '}')
+  return output
+end
+
+local function parse_snippet(input)
+  local ok, parsed = pcall(function()
+    return vim.lsp._snippet_grammar.parse(input)
+  end)
+  return ok and tostring(parsed) or parse_snippet_fallback(input)
+end
+
+function M.snippet_text_edits_to_text_edits(text_edits)
+  if type(text_edits) ~= 'table' then
+    return
+  end
+  for _, value in ipairs(text_edits) do
+    if value.newText and value.insertTextFormat then
+      value.newText = parse_snippet(value.newText)
+    end
+  end
+end
+
 local function get_active_client_root(file_name)
   local cargo_home = M.uv.os_getenv('CARGO_HOME') or M.joinpath(vim.env.HOME, '.cargo')
   local registry = M.joinpath(cargo_home, 'registry', 'src')
@@ -381,6 +409,14 @@ end
 lspconfig.rust_analyzer.setup({
   name = 'rust-analyzer',
   filetypes = { 'rust' },
+  on_init = function()
+    local old_func = vim.lsp.util.apply_text_edits
+
+    vim.lsp.util.apply_text_edits = function(edits, bufnr, offset_encoding)
+      M.snippet_text_edits_to_text_edits(edits)
+      old_func(edits, bufnr, offset_encoding or 'utf-8')
+    end
+  end,
   on_attach = on_attach,
   root_dir = rust_root_dir,
   capabilities = cmp.get_lsp_capabilities(rustcap()),
