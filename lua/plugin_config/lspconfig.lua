@@ -422,6 +422,9 @@ lspconfig.rust_analyzer.setup({
   capabilities = cmp.get_lsp_capabilities(rustcap()),
   settings = {
     ['rust-analyzer'] = {
+      cargo = {
+        target = 'i686-pc-windows-msvc'
+      },
       diagnostics = {
         enable = true,
       },
