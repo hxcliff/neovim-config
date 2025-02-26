@@ -423,7 +423,7 @@ lspconfig.rust_analyzer.setup({
   settings = {
     ['rust-analyzer'] = {
       cargo = {
-        target = 'i686-pc-windows-msvc'
+        -- target = 'i686-pc-windows-msvc'
       },
       diagnostics = {
         enable = true,

@@ -93,7 +93,12 @@ require('lazy').setup({
     tag = 'stable',
     event = { 'BufRead Cargo.toml' },
     config = function()
-      require('crates').setup({})
+      require('crates').setup({
+        lsp = {
+          enabled = true,
+          completion = true
+        }
+      })
     end
   },
   {
