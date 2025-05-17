@@ -89,6 +89,10 @@ require('lazy').setup({
   },
   'famiu/bufdelete.nvim',
   {
+    'pmizio/typescript-tools.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim' }
+  },
+  {
     'mrcjkb/rustaceanvim',
     version = '^6',
     lazy = false

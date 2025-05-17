@@ -1,4 +1,6 @@
 local lspconfig = require('lspconfig')
+local lspconfig_util = require('lspconfig.util')
+local protocol = require('vim.lsp.protocol')
 local cmp = require('blink.cmp')
 
 local on_attach = function(client, bufnr)
@@ -48,19 +50,19 @@ lspconfig.lua_ls.setup({
 })
 
 lspconfig.jsonls.setup({
-  on_attach = on_attach,
+  on_attach = on_attach
 })
 
 lspconfig.taplo.setup({
-  on_attach = on_attach,
+  on_attach = on_attach
 })
 
 lspconfig.yamlls.setup({
-  on_attach = on_attach,
+  on_attach = on_attach
 })
 
 lspconfig.clangd.setup({
-  on_attach = on_attach,
+  on_attach = on_attach
 })
 
 lspconfig.html.setup({
@@ -72,13 +74,17 @@ lspconfig.html.setup({
   end)())
 })
 
-lspconfig.cssls.setup {
+lspconfig.cssls.setup({
   on_attach = on_attach,
   capabilities = cmp.get_lsp_capabilities((function()
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities.textDocument.completion.completionItem.snippetSupport = true
     return capabilities
   end)())
+})
+
+require('typescript-tools').setup {
+  on_attach = on_attach
 }
 
 vim.g.rustaceanvim = {
