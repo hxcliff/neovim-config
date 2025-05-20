@@ -26,6 +26,7 @@ map('n', ',w', ':Telescope live_grep<CR>', opt)
 map('n', ',b', ':Telescope buffers<CR>', opt)
 map('n', ',t', ':Neotree toggle<CR>', opt)
 map('n', ',o', ':Outline<CR>', opt)
+map('n', ',c', ':CodeCompanionActions<CR>', opt)
 
 map('n', '<A-h>', ':BufferLineCyclePrev<CR>', opt)
 map('n', '<A-l>', ':BufferLineCycleNext<CR>', opt)
