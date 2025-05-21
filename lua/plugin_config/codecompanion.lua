@@ -2,6 +2,17 @@ local codecompanion = require('codecompanion')
 local adapters = require('codecompanion.adapters')
 
 codecompanion.setup({
+  opts = {
+    language = 'Chinese'
+  },
+  display = {
+    chat = {
+      window = {
+        layout = 'float',
+        width = 0.6
+      }
+    }
+  },
   adapters = {
     openrouter = function()
       return adapters.extend('openai_compatible', {
@@ -12,7 +23,7 @@ codecompanion.setup({
         },
         schema = {
           model = {
-            default = 'openai/gpt-4.1'
+            default = 'anthropic/claude-3.7-sonnet'
           }
         }
       })
