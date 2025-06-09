@@ -1,5 +1,4 @@
 local lspconfig = require('lspconfig')
-local lspconfig_util = require('lspconfig.util')
 local protocol = require('vim.lsp.protocol')
 local cmp = require('blink.cmp')
 
@@ -68,7 +67,7 @@ lspconfig.clangd.setup({
 lspconfig.html.setup({
   on_attach = on_attach,
   capabilities = cmp.get_lsp_capabilities((function()
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    local capabilities = protocol.make_client_capabilities()
     capabilities.textDocument.completion.completionItem.snippetSupport = true
     return capabilities
   end)())
@@ -77,7 +76,7 @@ lspconfig.html.setup({
 lspconfig.cssls.setup({
   on_attach = on_attach,
   capabilities = cmp.get_lsp_capabilities((function()
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    local capabilities = protocol.make_client_capabilities()
     capabilities.textDocument.completion.completionItem.snippetSupport = true
     return capabilities
   end)())
