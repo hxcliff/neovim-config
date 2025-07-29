@@ -1,16 +1,6 @@
-local lspconfig = require('lspconfig')
-local protocol = require('vim.lsp.protocol')
-local cmp = require('blink.cmp')
+local jdtls = require('jdtls')
 
 local on_attach = function(client, bufnr)
-  if client.name == 'rust-analyzer' then
-    client.server_capabilities.semanticTokensProvider = nil
-  end
-
-  if client.name == 'yamlls' then
-    client.server_capabilities.documentFormattingProvider = true
-  end
-
   local opt = { noremap = true, silent = true }
   local function mapbuf(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 
@@ -44,54 +34,48 @@ local on_attach = function(client, bufnr)
   end
 end
 
-lspconfig.lua_ls.setup({
-  on_attach = on_attach
-})
+local handlers = {}
+handlers['language/status'] = function(_, _) end
 
-lspconfig.jsonls.setup({
-  on_attach = on_attach
-})
+local launcher_jar = vim.fn.glob(vim.fn.stdpath('data') .. '/mason/packages/jdtls/plugins/org.eclipse.equinox.launcher_*.jar')
 
-lspconfig.taplo.setup({
-  on_attach = on_attach
-})
-
-lspconfig.lemminx.setup({
+jdtls.start_or_attach({
+  handlers = handlers,
+  settings = {
+    java = {
+      home = '/usr/lib/jvm/temurin-21-jdk-amd64',
+      configuration = {
+        runtimes = {
+          {
+            name = 'JavaSE-1.8',
+            path = '/opt/jdk8u462-b08',
+          },
+          {
+            name = 'JavaSE-21',
+            path = '/opt/jdk-21.0.8+9',
+          },
+        }
+      }
+    }
+  },
   on_attach = on_attach,
+  cmd = {
+    'java',
+    '-Declipse.application=org.eclipse.jdt.ls.core.id1',
+    '-Dosgi.bundles.defaultStartLevel=4',
+    '-Declipse.product=org.eclipse.jdt.ls.core.product',
+    '-Dlog.protocol=true',
+    '-Dlog.level=ALL',
+    '-Xmx1G',
+    '-javaagent:' .. vim.fn.expand('~/.config/nvim/ftplugin/lombok.jar'),
+    '--add-modules=ALL-SYSTEM',
+    '--add-opens', 'java.base/java.util=ALL-UNNAMED',
+    '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
+    '-jar', launcher_jar,
+    '-configuration',
+    vim.fn.stdpath('data') .. '/mason/packages/jdtls/config_linux',
+    '-data',
+    vim.fn.expand('~/.cache/jdtls-workspace/') .. vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
+  },
+  root_dir = vim.fs.dirname(vim.fs.find({ 'gradlew', '.git', 'mvnw' }, { upward = true })[1])
 })
-
-lspconfig.yamlls.setup({
-  on_attach = on_attach
-})
-
-lspconfig.clangd.setup({
-  on_attach = on_attach
-})
-
-lspconfig.html.setup({
-  on_attach = on_attach,
-  capabilities = cmp.get_lsp_capabilities((function()
-    local capabilities = protocol.make_client_capabilities()
-    capabilities.textDocument.completion.completionItem.snippetSupport = true
-    return capabilities
-  end)())
-})
-
-lspconfig.cssls.setup({
-  on_attach = on_attach,
-  capabilities = cmp.get_lsp_capabilities((function()
-    local capabilities = protocol.make_client_capabilities()
-    capabilities.textDocument.completion.completionItem.snippetSupport = true
-    return capabilities
-  end)())
-})
-
-require('typescript-tools').setup {
-  on_attach = on_attach
-}
-
-vim.g.rustaceanvim = {
-  server = {
-    on_attach = on_attach
-  }
-}
