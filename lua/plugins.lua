@@ -6,16 +6,17 @@ require('lazy').setup({
     priority = 1000,
     config = function()
       require('catppuccin').setup({
+        float = {
+          solid = true
+        },
         integrations = {
-          blink_cmp = true,
           fidget = true,
           indent_blankline = {
             colored_indent_levels = true
           },
           mason = true,
           telescope = {
-            enabled = true,
-            style = 'nvchad'
+            enabled = true
           }
         }
       })
