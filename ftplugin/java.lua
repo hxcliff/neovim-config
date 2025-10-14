@@ -43,16 +43,16 @@ jdtls.start_or_attach({
   handlers = handlers,
   settings = {
     java = {
-      home = '/usr/lib/jvm/temurin-21-jdk-amd64',
+      home = '/usr/lib/jvm/java-8-openjdk',
       configuration = {
         runtimes = {
           {
             name = 'JavaSE-1.8',
-            path = '/opt/jdk8u462-b08',
+            path = '/usr/lib/jvm/java-8-openjdk',
           },
           {
-            name = 'JavaSE-21',
-            path = '/opt/jdk-21.0.8+9',
+            name = 'JavaSE-17',
+            path = '/usr/lib/jvm/java-17-openjdk',
           },
         }
       }
@@ -60,7 +60,7 @@ jdtls.start_or_attach({
   },
   on_attach = on_attach,
   cmd = {
-    'java',
+    '/usr/lib/jvm/java-17-openjdk/bin/java',
     '-Declipse.application=org.eclipse.jdt.ls.core.id1',
     '-Dosgi.bundles.defaultStartLevel=4',
     '-Declipse.product=org.eclipse.jdt.ls.core.product',

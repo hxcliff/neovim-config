@@ -1,7 +1,7 @@
 local bufferline = require('bufferline')
 
 bufferline.setup({
-  highlights = require('catppuccin.groups.integrations.bufferline').get(),
+  highlights = require("catppuccin.special.bufferline").get_theme(),
   options = {
     separator_style = 'thin',
     close_command = 'Bdelete %d',

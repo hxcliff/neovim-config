@@ -1,4 +1,3 @@
-local lspconfig = require('lspconfig')
 local protocol = require('vim.lsp.protocol')
 local cmp = require('blink.cmp')
 
@@ -44,31 +43,7 @@ local on_attach = function(client, bufnr)
   end
 end
 
-lspconfig.lua_ls.setup({
-  on_attach = on_attach
-})
-
-lspconfig.jsonls.setup({
-  on_attach = on_attach
-})
-
-lspconfig.taplo.setup({
-  on_attach = on_attach
-})
-
-lspconfig.lemminx.setup({
-  on_attach = on_attach,
-})
-
-lspconfig.yamlls.setup({
-  on_attach = on_attach
-})
-
-lspconfig.clangd.setup({
-  on_attach = on_attach
-})
-
-lspconfig.html.setup({
+vim.lsp.config('*', {
   on_attach = on_attach,
   capabilities = cmp.get_lsp_capabilities((function()
     local capabilities = protocol.make_client_capabilities()
@@ -77,18 +52,18 @@ lspconfig.html.setup({
   end)())
 })
 
-lspconfig.cssls.setup({
-  on_attach = on_attach,
-  capabilities = cmp.get_lsp_capabilities((function()
-    local capabilities = protocol.make_client_capabilities()
-    capabilities.textDocument.completion.completionItem.snippetSupport = true
-    return capabilities
-  end)())
-})
+vim.lsp.enable('lua_ls')
+vim.lsp.enable('jsonls')
+vim.lsp.enable('taplo')
+vim.lsp.enable('lemminx')
+vim.lsp.enable('yamlls')
+vim.lsp.enable('clangd')
+vim.lsp.enable('html')
+vim.lsp.enable('cssls')
 
-require('typescript-tools').setup {
+require('typescript-tools').setup({
   on_attach = on_attach
-}
+})
 
 vim.g.rustaceanvim = {
   server = {
