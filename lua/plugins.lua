@@ -57,7 +57,7 @@ require('lazy').setup({
   {
     'saghen/blink.cmp',
     lazy = false,
-    version = 'v0.*'
+    version = '1.*'
   },
   {
     'm4xshen/autoclose.nvim',
