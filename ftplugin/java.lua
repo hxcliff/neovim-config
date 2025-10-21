@@ -24,12 +24,12 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
       group = 'DocumentHighlight',
       buffer = bufnr,
-      callback = vim.lsp.buf.document_highlight,
+      callback = vim.lsp.buf.document_highlight
     })
     vim.api.nvim_create_autocmd('CursorMoved', {
       group = 'DocumentHighlight',
       buffer = bufnr,
-      callback = vim.lsp.buf.clear_references,
+      callback = vim.lsp.buf.clear_references
     })
   end
 end
@@ -48,19 +48,23 @@ jdtls.start_or_attach({
         runtimes = {
           {
             name = 'JavaSE-1.8',
-            path = '/usr/lib/jvm/java-8-openjdk',
+            path = '/usr/lib/jvm/java-8-openjdk'
           },
           {
             name = 'JavaSE-17',
-            path = '/usr/lib/jvm/java-17-openjdk',
+            path = '/usr/lib/jvm/java-17-openjdk'
           },
+          {
+            name = 'JavaSE-21',
+            path = '/usr/lib/jvm/java-21-openjdk'
+          }
         }
       }
     }
   },
   on_attach = on_attach,
   cmd = {
-    '/usr/lib/jvm/java-17-openjdk/bin/java',
+    '/usr/lib/jvm/java-21-openjdk/bin/java',
     '-Declipse.application=org.eclipse.jdt.ls.core.id1',
     '-Dosgi.bundles.defaultStartLevel=4',
     '-Declipse.product=org.eclipse.jdt.ls.core.product',
