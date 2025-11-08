@@ -43,23 +43,20 @@ local on_attach = function(client, bufnr)
   end
 end
 
-vim.lsp.config('*', {
-  on_attach = on_attach,
-  capabilities = cmp.get_lsp_capabilities((function()
-    local capabilities = protocol.make_client_capabilities()
-    capabilities.textDocument.completion.completionItem.snippetSupport = true
-    return capabilities
-  end)())
-})
+local servers = { 'lua_ls', 'jsonls', 'taplo', 'lemminx', 'yamlls', 'clangd', 'html', 'cssls', 'pyright' }
 
-vim.lsp.enable('lua_ls')
-vim.lsp.enable('jsonls')
-vim.lsp.enable('taplo')
-vim.lsp.enable('lemminx')
-vim.lsp.enable('yamlls')
-vim.lsp.enable('clangd')
-vim.lsp.enable('html')
-vim.lsp.enable('cssls')
+for _, server in ipairs(servers) do
+  vim.lsp.config(server, {
+    on_attach = on_attach,
+    capabilities = cmp.get_lsp_capabilities((function()
+      local capabilities = protocol.make_client_capabilities()
+      capabilities.textDocument.completion.completionItem.snippetSupport = true
+      return capabilities
+    end)())
+  })
+
+  vim.lsp.enable(server)
+end
 
 require('typescript-tools').setup({
   on_attach = on_attach
