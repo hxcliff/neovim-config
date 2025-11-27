@@ -43,7 +43,7 @@ local on_attach = function(client, bufnr)
   end
 end
 
-local servers = { 'lua_ls', 'jsonls', 'taplo', 'lemminx', 'yamlls', 'clangd', 'html', 'cssls', 'pyright' }
+local servers = { 'lua_ls', 'jsonls', 'taplo', 'lemminx', 'yamlls', 'clangd', 'html', 'cssls', 'pyright', 'ts_ls' }
 
 for _, server in ipairs(servers) do
   vim.lsp.config(server, {
@@ -64,6 +64,13 @@ require('typescript-tools').setup({
 
 vim.g.rustaceanvim = {
   server = {
-    on_attach = on_attach
+    on_attach = on_attach,
+    default_settings = {
+      ['rust-analyzer'] = {
+        cargo = {
+          target = 'x86_64-pc-windows-msvc'
+        }
+      }
+    }
   }
 }

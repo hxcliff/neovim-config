@@ -151,5 +151,12 @@ require('lazy').setup({
     ft = { 'markdown' },
     dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }
   },
-  'mfussenegger/nvim-jdtls'
+  'mfussenegger/nvim-jdtls',
+  {
+    'olimorris/codecompanion.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-treesitter/nvim-treesitter'
+    }
+  }
 })
