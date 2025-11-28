@@ -24,7 +24,7 @@ codecompanion.setup({
           },
           schema = {
             model = {
-              default = 'anthropic/claude-4.5-sonnet'
+              default = 'x-ai/grok-code-fast-1'
             }
           }
         })

@@ -43,7 +43,7 @@ local on_attach = function(client, bufnr)
   end
 end
 
-local servers = { 'lua_ls', 'jsonls', 'taplo', 'lemminx', 'yamlls', 'clangd', 'html', 'cssls', 'pyright', 'ts_ls' }
+local servers = { 'lua_ls', 'jsonls', 'taplo', 'lemminx', 'yamlls', 'clangd', 'html', 'cssls', 'pyright', 'ts_ls', 'dartls' }
 
 for _, server in ipairs(servers) do
   vim.lsp.config(server, {
@@ -60,6 +60,12 @@ end
 
 require('typescript-tools').setup({
   on_attach = on_attach
+})
+
+require('flutter-tools').setup({
+  lsp = {
+    on_attach = on_attach
+  }
 })
 
 vim.g.rustaceanvim = {
