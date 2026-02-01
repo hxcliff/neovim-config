@@ -29,9 +29,13 @@ require('lazy').setup({
   },
   {
     'nvim-treesitter/nvim-treesitter',
+    lazy = false,
     build = ':TSUpdate'
   },
-  'nvim-treesitter/nvim-treesitter-textobjects',
+  {
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    branch = 'main'
+  },
   {
     'nvim-treesitter/nvim-treesitter-context',
     config = function()
@@ -49,7 +53,6 @@ require('lazy').setup({
   },
   {
     'nvim-telescope/telescope.nvim',
-    branch = '0.1.x',
     dependencies = 'nvim-lua/plenary.nvim'
   },
   'nvim-telescope/telescope-ui-select.nvim',
@@ -152,14 +155,6 @@ require('lazy').setup({
     dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }
   },
   'mfussenegger/nvim-jdtls',
-  {
-    'olimorris/codecompanion.nvim',
-    tag = 'v17.33.0',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'nvim-treesitter/nvim-treesitter'
-    }
-  },
   {
     'nvim-flutter/flutter-tools.nvim',
     lazy = false,

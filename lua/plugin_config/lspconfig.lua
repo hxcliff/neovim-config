@@ -74,7 +74,7 @@ vim.g.rustaceanvim = {
     default_settings = {
       ['rust-analyzer'] = {
         cargo = {
-          target = 'x86_64-pc-windows-msvc'
+          -- target = 'x86_64-pc-windows-msvc'
         }
       }
     }
