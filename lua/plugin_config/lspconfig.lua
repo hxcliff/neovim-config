@@ -43,7 +43,7 @@ local on_attach = function(client, bufnr)
   end
 end
 
-local servers = { 'lua_ls', 'jsonls', 'taplo', 'lemminx', 'yamlls', 'clangd', 'html', 'cssls', 'pyright', 'ts_ls', 'dartls' }
+local servers = { 'lua_ls', 'jsonls', 'taplo', 'lemminx', 'yamlls', 'clangd', 'html', 'cssls', 'pyright', 'ts_ls', 'dartls', 'kotlin_lsp' }
 
 for _, server in ipairs(servers) do
   vim.lsp.config(server, {

@@ -43,20 +43,12 @@ jdtls.start_or_attach({
   handlers = handlers,
   settings = {
     java = {
-      home = '/usr/lib/jvm/java-8-openjdk',
+      home = '/usr/lib/jvm/java-21-openjdk-amd64',
       configuration = {
         runtimes = {
           {
-            name = 'JavaSE-1.8',
-            path = '/usr/lib/jvm/java-8-openjdk'
-          },
-          {
-            name = 'JavaSE-17',
-            path = '/usr/lib/jvm/java-17-openjdk'
-          },
-          {
             name = 'JavaSE-21',
-            path = '/usr/lib/jvm/java-21-openjdk'
+            path = '/usr/lib/jvm/java-21-openjdk-amd64'
           }
         }
       }
@@ -64,7 +56,7 @@ jdtls.start_or_attach({
   },
   on_attach = on_attach,
   cmd = {
-    '/usr/lib/jvm/java-21-openjdk/bin/java',
+    '/usr/lib/jvm/java-21-openjdk-amd64/bin/java',
     '-Declipse.application=org.eclipse.jdt.ls.core.id1',
     '-Dosgi.bundles.defaultStartLevel=4',
     '-Declipse.product=org.eclipse.jdt.ls.core.product',
